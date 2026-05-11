@@ -1,0 +1,44 @@
+/* css/custom.css */
+html {
+    scroll-behavior: smooth;
+}
+
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+/* Estilo para el enlace activo en el navbar */
+.nav-link.active {
+    font-weight: bold;
+    color: #fefefe !important;
+    border-bottom: 2px solid #0d6efd;
+}
+
+/* Animación de resaltado para secciones (opcional) */
+@keyframes softHighlight {
+    0% {
+        background-color: rgba(13, 110, 253, 0);
+    }
+
+    30% {
+        background-color: rgba(13, 110, 253, 0.15);
+    }
+
+    100% {
+        background-color: rgba(13, 110, 253, 0);
+    }
+}
+
+.section-highlight {
+    animation: softHighlight 1s ease-out;
+}
+
+/* Mejora el scroll suave en toda la página si usas la opción CSS */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Compensación para navbar fijo */
+section[id] {
+    scroll-margin-top: 80px;
+}
