@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instituto Horizonte | Pagos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+  <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Instituto Horizonte</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#payNav"
+        aria-controls="payNav" aria-expanded="false" aria-label="Mostrar navegación">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="payNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="programas.html">Programas</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="py-5 bg-body-tertiary">
+    <div class="container py-4 text-center">
+      <span class="badge text-bg-warning mb-2">Tesorería académica</span>
+      <h1 class="display-5 fw-bold">Opciones claras para matrícula, pensiones y financiamiento</h1>
+      <p class="lead text-secondary">Consulta cronogramas, cuotas y medios de pago disponibles para estudiantes nuevos y regulares.</p>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <span class="badge text-bg-light border mb-3">Pregrado</span>
+              <h3 class="h4">Matrícula Regular</h3>
+              <p class="display-6 fw-bold text-primary">S/ 420</p>
+              <p class="text-secondary mb-0">Acceso al periodo académico, plataformas virtuales y servicios administrativos.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card h-100 shadow border-primary">
+            <div class="card-body">
+              <span class="badge text-bg-primary mb-3">Mensualidad</span>
+              <h3 class="h4">Pensión Estándar</h3>
+              <p class="display-6 fw-bold text-primary">S/ 780</p>
+              <p class="text-secondary mb-0">Fraccionamiento en 5 cuotas, descuentos por pronto pago y convenios vigentes.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <span class="badge text-bg-light border mb-3">Beneficio</span>
+              <h3 class="h4">Beca y Financiamiento</h3>
+              <p class="display-6 fw-bold text-primary">Hasta 40%</p>
+              <p class="text-secondary mb-0">Aplicable según rendimiento académico, perfil socioeconómico o convenios institucionales.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-5">
+          <span class="badge text-bg-warning mb-2">Cómo pagar</span>
+          <h2 class="display-6 fw-bold">Proceso simple y trazable</h2>
+          <p class="text-secondary">Puedes realizar tus pagos por banca digital, caja institucional o convenios recaudadores.</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="card shadow-sm rounded-4 border-0">
+            <div class="card-body p-4">
+              <div class="list-group list-group-flush">
+                <div class="list-group-item py-3">
+                  <h3 class="h5 mb-1">1. Genera tu orden</h3>
+                  <p class="mb-0 text-secondary">Solicita el concepto de pago desde admisión o tesorería académica.</p>
+                </div>
+                <div class="list-group-item py-3">
+                  <h3 class="h5 mb-1">2. Elige el medio</h3>
+                  <p class="mb-0 text-secondary">Paga por banca móvil, transferencia, ventanilla o plataforma aliada.</p>
+                </div>
+                <div class="list-group-item py-3">
+                  <h3 class="h5 mb-1">3. Envía tu constancia</h3>
+                  <p class="mb-0 text-secondary">Registra el comprobante para activar matrícula, beneficios o validación administrativa.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-5">
+          <span class="badge text-bg-warning mb-3">Medios de pago</span>
+          <h2 class="display-6 fw-bold">Paga con Yape, Plin o tu banco favorito</h2>
+          <p class="text-secondary">Selecciona tu medio de pago y sigue las instrucciones para realizar el abono más rápido.</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+              <div class="mb-4">
+                <label for="paymentMethod" class="form-label">Medio de pago</label>
+                <select id="paymentMethod" class="form-select">
+                  <option value="yape">Yape</option>
+                  <option value="plin">Plin</option>
+                  <option value="bcp">BCP</option>
+                  <option value="interbank">Interbank</option>
+                  <option value="bbva">BBVA</option>
+                </select>
+              </div>
+              <div id="paymentInstructions" class="alert alert-light border p-4">
+                <h3 class="h6 mb-2">Instrucciones de pago</h3>
+                <p class="mb-0">Selecciona un medio de pago para ver los datos y pasos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-5">
+          <span class="badge text-bg-warning mb-3">Contacto rápido</span>
+          <h2 class="display-6 fw-bold">¿Necesitas ayuda con tu pago o matrícula?</h2>
+          <p class="text-secondary">Completa el formulario y nuestro equipo de admisiones se comunicará contigo en menos de 24 horas.</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+              <form id="contactForm" action="javascript:void(0);" method="post">
+                <div class="row gy-3">
+                  <div class="col-md-6">
+                    <label for="studentName" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="studentName" placeholder="Tu nombre" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="studentEmail" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="studentEmail" placeholder="correo@ejemplo.com" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="studentPhone" class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" id="studentPhone" placeholder="912 345 678">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="programSelect" class="form-label">Programa de interés</label>
+                    <select id="programSelect" class="form-select" required>
+                      <option value="" selected>Selecciona un programa</option>
+                      <option>Administración y Finanzas</option>
+                      <option>Ingeniería de Software</option>
+                      <option>Psicología</option>
+                      <option>Ciencia de Datos</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="paymentMethodForm" class="form-label">Medio de pago</label>
+                    <select id="paymentMethodForm" class="form-select" required>
+                      <option value="" selected>Selecciona un medio</option>
+                      <option>Yape</option>
+                      <option>Plin</option>
+                      <option>BCP</option>
+                      <option>Interbank</option>
+                      <option>BBVA</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label for="message" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Cuéntanos qué necesitas: pago, matrícula o asesoría"></textarea>
+                  </div>
+                  <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
+                    <button type="submit" class="btn btn-primary">Enviar consulta</button>
+                    <span class="text-secondary small">Nuestro equipo te responderá pronto.</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script>
+    const paymentMethod = document.getElementById('paymentMethod');
+    const paymentInstructions = document.getElementById('paymentInstructions');
+    const methodDetails = {
+      yape: {
+        title: 'Yape',
+        details: 'Envía el monto a Yape 999-999-999. Incluye el nombre del estudiante y el concepto: matrícula 2026.',
+      },
+      plin: {
+        title: 'Plin',
+        details: 'Escanea el código QR en tu aplicación o envía a Plin 999-999-999. Indica programa y periodo.',
+      },
+      bcp: {
+        title: 'BCP',
+        details: 'Usa transferencia a la cuenta BCP 001-2345678-9-12 (CC). Titular: Instituto Horizonte.',
+      },
+      interbank: {
+        title: 'Interbank',
+        details: 'Realiza transferencia a Interbank 123-4567890. Titular: Instituto Horizonte. Revisa el concepto.',
+      },
+      bbva: {
+        title: 'BBVA',
+        details: 'Realiza transferencia a BBVA 987-6543210. Titular: Instituto Horizonte. Adjunta el comprobante luego.',
+      },
+    };
+
+    function updatePaymentInstructions() {
+      const value = paymentMethod.value;
+      const method = methodDetails[value];
+      if (method) {
+        paymentInstructions.innerHTML = `
+          <h3 class="h6 mb-2">${method.title}</h3>
+          <p class="mb-2">${method.details}</p>
+          <p class="mb-0 text-muted">Después del pago, envía tu comprobante al correo <strong>pagos@institutohorizonte.edu</strong> o destaca tu solicitud usando el formulario.</p>
+        `;
+      }
+    }
+
+    paymentMethod.addEventListener('change', updatePaymentInstructions);
+    updatePaymentInstructions();
+
+    document.getElementById('contactForm')?.addEventListener('submit', function (event) {
+      event.preventDefault();
+      alert('¡Gracias! Tu consulta ha sido enviada. Nuestro equipo te contactará pronto.');
+      event.target.reset();
+      updatePaymentInstructions();
+    });
+  </script>
+</body>
+
+<footer class="py-5 border-top bg-white">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h3 class="h4">Instituto Horizonte</h3>
+          <p class="text-secondary mb-3">Educación superior con visión global, formación aplicada y compromiso con la excelencia.</p>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-secondary" aria-label="Facebook"><i class="bi bi-facebook fs-4"></i></a>
+            <a href="#" class="text-secondary" aria-label="Instagram"><i class="bi bi-instagram fs-4"></i></a>
+            <a href="#" class="text-secondary" aria-label="LinkedIn"><i class="bi bi-linkedin fs-4"></i></a>
+            <a href="#" class="text-secondary" aria-label="YouTube"><i class="bi bi-youtube fs-4"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h4 class="h6 text-uppercase text-secondary">Enlaces</h4>
+          <div class="d-grid gap-2">
+            <a href="index.html" class="text-decoration-none">Inicio</a>
+            <a href="programas.html" class="text-decoration-none">Programas</a>
+            <a href="pagos.html" class="text-decoration-none">Pagos</a>
+            <a href="#eventos" class="text-decoration-none">Eventos</a>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h4 class="h6 text-uppercase text-secondary">Contacto</h4>
+          <p class="mb-1 text-secondary"><i class="bi bi-geo-alt"></i> Av. Académica 245, Lima, Perú</p>
+          <p class="mb-1 text-secondary"><i class="bi bi-envelope"></i> admision@institutohorizonte.edu</p>
+          <p class="mb-1 text-secondary"><i class="bi bi-telephone"></i> +51 999 555 210</p>
+          <p class="mb-0 text-secondary"><i class="bi bi-clock"></i> Lun-Vie: 8:00-18:00</p>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="mb-0 text-secondary small">© 2026 Instituto Horizonte. Todos los derechos reservados.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a href="#" class="text-decoration-none text-secondary small me-3">Política de privacidad</a>
+          <a href="#" class="text-decoration-none text-secondary small">Términos de uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</html>
