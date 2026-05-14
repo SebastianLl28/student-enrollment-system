@@ -15,15 +15,15 @@
     <div class="container d-flex flex-wrap justify-content-between gap-2">
       <span>Admisiones 2026 abiertas | Becas por excelencia</span>
       <div class="d-flex gap-3">
-        <a class="nav-link active" href="programas.html"><i class="bi bi-mortarboard"></i> Programas</a>
-        <a class="nav-link active" href="pagos.html"> <i class="bi bi-credit-card"> Pagos </i></a>
+        <a class="nav-link active" th:href="@{/programas}" href="/programas"><i class="bi bi-mortarboard"></i> Programas</a>
+        <a class="nav-link active" th:href="@{/pagos}" href="/pagos"> <i class="bi bi-credit-card"> Pagos </i></a>
       </div>
     </div>
   </div>
 
   <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">Instituto Horizonte</a>
+      <a class="navbar-brand fw-bold" th:href="@{/}" href="/">Instituto Horizonte</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
         aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar navegación">
         <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,7 @@
           <li class="nav-item"><a class="nav-link" href="#facultades">Facultades</a></li>
           <li class="nav-item"><a class="nav-link" href="#programas">Carreras</a></li>
           <li class="nav-item"><a class="nav-link" href="#eventos">Eventos</a></li>
-          <li class="nav-item"><a class="nav-link" href="pagos.html">Pagos</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/pagos}" href="/pagos">Pagos</a></li>
         </ul>
         <a class="btn btn-primary" href="#programas">Solicitar información</a>
       </div>
@@ -51,7 +51,7 @@
           </p>
           <div class="d-flex flex-wrap gap-3 mt-4">
             <a class="btn btn-primary btn-lg" href="#programas">Explorar carreras</a>
-            <a class="btn btn-outline-secondary btn-lg" href="pagos.html">Ver pagos</a>
+            <a class="btn btn-outline-secondary btn-lg" th:href="@{/pagos}" href="/pagos">Ver pagos</a>
           </div>
           <div class="row g-3 mt-4">
             <div class="col-sm-4">
@@ -164,7 +164,7 @@
               <span class="badge text-bg-light border mb-3">Salud</span>
               <h3 class="h4">Ciencias de la Salud</h3>
               <p class="text-secondary">Programas orientados a prevención, atención clínica y bienestar comunitario.</p>
-              <a class="btn btn-link px-0" href="programas.html">Ver carreras</a>
+              <a class="btn btn-link px-0" th:href="@{/programas}" href="/programas">Ver carreras</a>
             </div>
           </div>
         </div>
@@ -174,7 +174,7 @@
               <span class="badge text-bg-light border mb-3">Tecnología</span>
               <h3 class="h4">Ingeniería y Sistemas</h3>
               <p class="text-secondary">Desarrollo de software, ciencia de datos y transformación digital.</p>
-              <a class="btn btn-link px-0" href="programas.html">Ver carreras</a>
+              <a class="btn btn-link px-0" th:href="@{/programas}" href="/programas">Ver carreras</a>
             </div>
           </div>
         </div>
@@ -184,7 +184,7 @@
               <span class="badge text-bg-light border mb-3">Gestión</span>
               <h3 class="h4">Negocios y Derecho</h3>
               <p class="text-secondary">Liderazgo, finanzas, marketing estratégico y formación jurídica.</p>
-              <a class="btn btn-link px-0" href="programas.html">Ver carreras</a>
+              <a class="btn btn-link px-0" th:href="@{/programas}" href="/programas">Ver carreras</a>
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@
           <span class="badge text-bg-warning mb-2">Oferta académica</span>
           <h2 class="display-6 fw-bold">Programas diseñados para resultados reales</h2>
           <p class="text-secondary">Cada carrera incorpora práctica preprofesional, certificaciones y acompañamiento laboral.</p>
-          <a class="btn btn-primary mt-3" href="programas.html">Conocer todos los programas</a>
+          <a class="btn btn-primary mt-3" th:href="@{/programas}" href="/programas">Conocer todos los programas</a>
         </div>
         <div class="col-lg-7">
           <div class="card shadow-sm mb-3">
@@ -300,8 +300,8 @@
             <p class="text-secondary mb-0">Solicita una asesoría personalizada, revisa costos y accede a nuestras modalidades de pago.</p>
           </div>
           <div class="col-lg-4 d-flex flex-wrap gap-3 justify-content-lg-end">
-            <a class="btn btn-primary" href="pagos.html">Ver pagos</a>
-            <a class="btn btn-outline-secondary" href="programas.html">Elegir programa</a>
+            <a class="btn btn-primary" th:href="@{/pagos}" href="/pagos">Ver pagos</a>
+            <a class="btn btn-outline-secondary" th:href="@{/programas}" href="/programas">Elegir programa</a>
           </div>
         </div>
       </div>
@@ -330,9 +330,9 @@
         <div class="col-lg-4">
           <h4 class="h6 text-uppercase text-secondary">Enlaces</h4>
           <div class="d-grid gap-2">
-            <a href="index.html" class="text-decoration-none">Inicio</a>
-            <a href="programas.html" class="text-decoration-none">Programas</a>
-            <a href="pagos.html" class="text-decoration-none">Pagos</a>
+            <a th:href="@{/}" href="/" class="text-decoration-none">Inicio</a>
+            <a th:href="@{/programas}" href="/programas" class="text-decoration-none">Programas</a>
+            <a th:href="@{/pagos}" href="/pagos" class="text-decoration-none">Pagos</a>
             <a href="#eventos" class="text-decoration-none">Eventos</a>
           </div>
         </div>

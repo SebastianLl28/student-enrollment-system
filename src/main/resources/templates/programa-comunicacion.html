@@ -10,15 +10,15 @@
 <body class="bg-light">
   <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">Instituto Horizonte</a>
+      <a class="navbar-brand fw-bold" th:href="@{/}" href="/">Instituto Horizonte</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
         aria-controls="navMenu" aria-expanded="false" aria-label="Mostrar navegación">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="programas.html">Programas</a></li>
-          <li class="nav-item"><a class="nav-link" href="pagos.html">Pagos</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/programas}" href="/programas">Programas</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/pagos}" href="/pagos">Pagos</a></li>
         </ul>
       </div>
     </div>
@@ -31,7 +31,7 @@
           <span class="badge text-bg-warning mb-3">Diseño</span>
           <h1 class="display-5 fw-bold">Comunicación Visual</h1>
           <p class="lead text-secondary">Aprende a crear experiencias visuales, branding y contenidos digitales de alto impacto.</p>
-          <a class="btn btn-primary" href="programas.html">Volver a Programas</a>
+          <a class="btn btn-primary" th:href="@{/programas}" href="/programas">Volver a Programas</a>
         </div>
         <div class="col-lg-6">
           <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" class="img-fluid rounded-4 shadow" alt="Comunicación visual">

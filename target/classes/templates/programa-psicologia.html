@@ -10,15 +10,15 @@
 <body class="bg-light">
   <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">Instituto Horizonte</a>
+      <a class="navbar-brand fw-bold" th:href="@{/}" href="/">Instituto Horizonte</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
         aria-controls="navMenu" aria-expanded="false" aria-label="Mostrar navegación">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="programas.html">Programas</a></li>
-          <li class="nav-item"><a class="nav-link" href="pagos.html">Pagos</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/programas}" href="/programas">Programas</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/pagos}" href="/pagos">Pagos</a></li>
         </ul>
       </div>
     </div>
@@ -31,7 +31,7 @@
           <span class="badge text-bg-warning mb-3">Salud</span>
           <h1 class="display-5 fw-bold">Psicología</h1>
           <p class="lead text-secondary">Formación en intervención clínica, evaluación psicológica y apoyo psicosocial con enfoque humanista.</p>
-          <a class="btn btn-primary" href="programas.html">Volver a Programas</a>
+          <a class="btn btn-primary" th:href="@{/programas}" href="/programas">Volver a Programas</a>
         </div>
         <div class="col-lg-6">
           <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1200&q=80" class="img-fluid rounded-4 shadow" alt="Psicología clínica">
@@ -115,9 +115,9 @@
         <div class="col-lg-4">
           <h4 class="h6 text-uppercase text-secondary">Enlaces</h4>
           <div class="d-grid gap-2">
-            <a href="index.html" class="text-decoration-none">Inicio</a>
-            <a href="programas.html" class="text-decoration-none">Programas</a>
-            <a href="pagos.html" class="text-decoration-none">Pagos</a>
+            <a th:href="@{/}" href="/" class="text-decoration-none">Inicio</a>
+            <a th:href="@{/programas}" href="/programas" class="text-decoration-none">Programas</a>
+            <a th:href="@{/pagos}" href="/pagos" class="text-decoration-none">Pagos</a>
             <a href="#eventos" class="text-decoration-none">Eventos</a>
           </div>
         </div>

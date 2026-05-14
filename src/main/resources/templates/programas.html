@@ -10,15 +10,15 @@
 <body class="bg-light">
   <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">Instituto Horizonte</a>
+      <a class="navbar-brand fw-bold" th:href="@{/}" href="/">Instituto Horizonte</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#programNav"
         aria-controls="programNav" aria-expanded="false" aria-label="Mostrar navegación">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="programNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="pagos.html">Pagos</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/}" href="/">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/pagos}" href="/pagos">Pagos</a></li>
         </ul>
       </div>
     </div>
@@ -43,7 +43,7 @@
               <span class="badge text-bg-light border mb-3">Negocios</span>
               <h3 class="h4">Administración y Finanzas</h3>
               <p class="text-secondary mb-3">Gestión empresarial, análisis financiero, liderazgo y estrategia comercial.</p>
-              <a class="btn btn-outline-primary" href="programa-administracion.html">Más información</a>
+              <a class="btn btn-outline-primary" th:href="@{/programas/administracion}" href="/programas/administracion">Más información</a>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
               <span class="badge text-bg-light border mb-3">Tecnología</span>
               <h3 class="h4">Ingeniería de Software</h3>
               <p class="text-secondary mb-3">Desarrollo web, bases de datos, UX, arquitectura y despliegue en nube.</p>
-              <a class="btn btn-outline-primary" href="programa-software.html">Más información</a>
+              <a class="btn btn-outline-primary" th:href="@{/programas/software}" href="/programas/software">Más información</a>
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@
               <span class="badge text-bg-light border mb-3">Salud</span>
               <h3 class="h4">Psicología</h3>
               <p class="text-secondary mb-3">Salud mental, intervención clínica y evaluación psicológica.</p>
-              <a class="btn btn-outline-primary" href="programa-psicologia.html">Más información</a>
+              <a class="btn btn-outline-primary" th:href="@{/programas/psicologia}" href="/programas/psicologia">Más información</a>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@
               <span class="badge text-bg-light border mb-3">Diseño</span>
               <h3 class="h4">Comunicación Visual</h3>
               <p class="text-secondary mb-3">Diseño editorial, interfaces digitales, fotografía y branding.</p>
-              <a class="btn btn-outline-primary" href="programa-comunicacion.html">Más información</a>
+              <a class="btn btn-outline-primary" th:href="@{/programas/comunicacion}" href="/programas/comunicacion">Más información</a>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@
               <span class="badge text-bg-light border mb-3">Legal</span>
               <h3 class="h4">Derecho Corporativo</h3>
               <p class="text-secondary mb-3">Compliance, contratación, litigación y asesoría empresarial.</p>
-              <a class="btn btn-outline-primary" href="programa-derecho.html">Más información</a>
+              <a class="btn btn-outline-primary" th:href="@{/programas/derecho}" href="/programas/derecho">Más información</a>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@
               <span class="badge text-bg-light border mb-3">Datos</span>
               <h3 class="h4">Ciencia de Datos</h3>
               <p class="text-secondary mb-3">Modelado, visualización y soluciones basadas en inteligencia analítica.</p>
-              <a class="btn btn-outline-primary" href="programa-datos.html">Más información</a>
+              <a class="btn btn-outline-primary" th:href="@{/programas/datos}" href="/programas/datos">Más información</a>
             </div>
           </div>
         </div>
@@ -122,9 +122,9 @@
         <div class="col-lg-4">
           <h4 class="h6 text-uppercase text-secondary">Enlaces</h4>
           <div class="d-grid gap-2">
-            <a href="index.html" class="text-decoration-none">Inicio</a>
-            <a href="programas.html" class="text-decoration-none">Programas</a>
-            <a href="pagos.html" class="text-decoration-none">Pagos</a>
+            <a th:href="@{/}" href="/" class="text-decoration-none">Inicio</a>
+            <a th:href="@{/programas}" href="/programas" class="text-decoration-none">Programas</a>
+            <a th:href="@{/pagos}" href="/pagos" class="text-decoration-none">Pagos</a>
             <a href="#eventos" class="text-decoration-none">Eventos</a>
           </div>
         </div>
