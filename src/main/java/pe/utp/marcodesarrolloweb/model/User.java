@@ -7,21 +7,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
-import pe.utp.marcodesarrolloweb.model.enums.DocumentType;
-import pe.utp.marcodesarrolloweb.model.enums.StudentStatus;
+import pe.utp.marcodesarrolloweb.model.enums.UserStatus;
 
 /**
  * @author Alonso
  */
 @Entity
-public class Student {
+public class User {
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  
-  @Column(nullable = false)
-  private String code;
   
   @Column(nullable = false)
   private String firstName;
@@ -30,24 +26,19 @@ public class Student {
   private String lastName;
   
   @Column(nullable = false)
-  private DocumentType documentType;
-  
-  @Column(nullable = false)
-  private String documentNumber;
-  
-  @Column(nullable = false)
   private String email;
   
-  private String phone;
-  
-  private String address;
+  @Column(nullable = false)
+  private String password;
   
   @Column(nullable = false)
-  private StudentStatus status = StudentStatus.ACTIVE;
+  private UserStatus userStatus = UserStatus.ACTIVE;
   
   @CreationTimestamp
   @Column(updatable = false)
   private LocalDateTime createdAt;
+  public User() {
+  }
   
   public Long getId() {
     return id;
@@ -55,14 +46,6 @@ public class Student {
   
   public void setId(Long id) {
     this.id = id;
-  }
-  
-  public String getCode() {
-    return code;
-  }
-  
-  public void setCode(String code) {
-    this.code = code;
   }
   
   public String getFirstName() {
@@ -81,22 +64,6 @@ public class Student {
     this.lastName = lastName;
   }
   
-  public DocumentType getDocumentType() {
-    return documentType;
-  }
-  
-  public void setDocumentType(DocumentType documentType) {
-    this.documentType = documentType;
-  }
-  
-  public String getDocumentNumber() {
-    return documentNumber;
-  }
-  
-  public void setDocumentNumber(String documentNumber) {
-    this.documentNumber = documentNumber;
-  }
-  
   public String getEmail() {
     return email;
   }
@@ -105,28 +72,20 @@ public class Student {
     this.email = email;
   }
   
-  public String getPhone() {
-    return phone;
+  public String getPassword() {
+    return password;
   }
   
-  public void setPhone(String phone) {
-    this.phone = phone;
+  public void setPassword(String password) {
+    this.password = password;
   }
   
-  public String getAddress() {
-    return address;
+  public UserStatus getUserStatus() {
+    return userStatus;
   }
   
-  public void setAddress(String address) {
-    this.address = address;
-  }
-  
-  public StudentStatus getStatus() {
-    return status;
-  }
-  
-  public void setStatus(StudentStatus status) {
-    this.status = status;
+  public void setUserStatus(UserStatus userStatus) {
+    this.userStatus = userStatus;
   }
   
   public LocalDateTime getCreatedAt() {

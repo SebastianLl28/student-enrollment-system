@@ -17,19 +17,19 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
-        <h1 class="h3 mb-1" th:text="${student.fullName}">Nombre del estudiante</h1>
+        <h1 class="h3 mb-1" th:text="${studentLocalModel.fullName}">Nombre del estudiante</h1>
         <p class="text-muted mb-0">
           Código:
-          <span th:text="${student.code}">STU001</span>
+          <span th:text="${studentLocalModel.code}">STU001</span>
         </p>
       </div>
 
       <div class="d-flex gap-2">
-        <a th:href="@{/student}" class="btn btn-outline-secondary">
+        <a th:href="@{/studentLocalModel}" class="btn btn-outline-secondary">
           Volver
         </a>
 
-        <a th:href="@{/student/{id}/edit(id=${student.id})}" class="btn btn-primary">
+        <a th:href="@{/studentLocalModel/{id}/edit(id=${studentLocalModel.id})}" class="btn btn-primary">
           Editar
         </a>
       </div>
@@ -44,39 +44,39 @@
 
         <div class="row mb-3">
           <div class="col-md-4 fw-semibold">ID</div>
-          <div class="col-md-8" th:text="${student.id}">1</div>
+          <div class="col-md-8" th:text="${studentLocalModel.id}">1</div>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-4 fw-semibold">Código</div>
-          <div class="col-md-8" th:text="${student.code}">STU001</div>
+          <div class="col-md-8" th:text="${studentLocalModel.code}">STU001</div>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-4 fw-semibold">Nombres</div>
-          <div class="col-md-8" th:text="${student.firstName}">Juan</div>
+          <div class="col-md-8" th:text="${studentLocalModel.firstName}">Juan</div>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-4 fw-semibold">Apellidos</div>
-          <div class="col-md-8" th:text="${student.lastName}">Pérez</div>
+          <div class="col-md-8" th:text="${studentLocalModel.lastName}">Pérez</div>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-4 fw-semibold">Nombre completo</div>
-          <div class="col-md-8" th:text="${student.fullName}">Juan Pérez</div>
+          <div class="col-md-8" th:text="${studentLocalModel.fullName}">Juan Pérez</div>
         </div>
 
         <hr>
 
         <div class="row mb-3">
           <div class="col-md-4 fw-semibold">Tipo de documento</div>
-          <div class="col-md-8" th:text="${student.documentType}">DNI</div>
+          <div class="col-md-8" th:text="${studentLocalModel.documentType}">DNI</div>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-4 fw-semibold">Número de documento</div>
-          <div class="col-md-8" th:text="${student.documentNumber}">12345678</div>
+          <div class="col-md-8" th:text="${studentLocalModel.documentNumber}">12345678</div>
         </div>
 
         <hr>
@@ -84,8 +84,8 @@
         <div class="row mb-3">
           <div class="col-md-4 fw-semibold">Email</div>
           <div class="col-md-8">
-            <a th:href="|mailto:${student.email}|"
-               th:text="${student.email}">
+            <a th:href="|mailto:${studentLocalModel.email}|"
+               th:text="${studentLocalModel.email}">
               estudiante@email.com
             </a>
           </div>
@@ -94,8 +94,8 @@
         <div class="row mb-3">
           <div class="col-md-4 fw-semibold">Teléfono</div>
           <div class="col-md-8">
-            <a th:href="|tel:${student.phone}|"
-               th:text="${student.phone}">
+            <a th:href="|tel:${studentLocalModel.phone}|"
+               th:text="${studentLocalModel.phone}">
               999999999
             </a>
           </div>
@@ -103,7 +103,7 @@
 
         <div class="row mb-3">
           <div class="col-md-4 fw-semibold">Dirección</div>
-          <div class="col-md-8" th:text="${student.address}">Av. Principal 123</div>
+          <div class="col-md-8" th:text="${studentLocalModel.address}">Av. Principal 123</div>
         </div>
 
         <hr>
@@ -112,8 +112,8 @@
           <div class="col-md-4 fw-semibold">Estado</div>
           <div class="col-md-8">
             <span class="badge"
-                  th:text="${student.status}"
-                  th:classappend="${student.status.name() == 'ACTIVE'} ? ' bg-success' : ' bg-secondary'">
+                  th:text="${studentLocalModel.status}"
+                  th:classappend="${studentLocalModel.status.name() == 'ACTIVE'} ? ' bg-success' : ' bg-secondary'">
               ACTIVE
             </span>
           </div>
@@ -122,7 +122,7 @@
         <div class="row mb-0">
           <div class="col-md-4 fw-semibold">Fecha de creación</div>
           <div class="col-md-8"
-               th:text="${#temporals.format(student.createdAt, 'dd/MM/yyyy HH:mm')}">
+               th:text="${#temporals.format(studentLocalModel.createdAt, 'dd/MM/yyyy HH:mm')}">
             01/01/2025 10:30
           </div>
         </div>

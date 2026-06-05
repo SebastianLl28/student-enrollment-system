@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pe.utp.marcodesarrolloweb.model.Student;
+import pe.utp.marcodesarrolloweb.model.StudentLocalModel;
 import pe.utp.marcodesarrolloweb.model.enums.DocumentType;
 import pe.utp.marcodesarrolloweb.model.enums.StudentStatus;
 import pe.utp.marcodesarrolloweb.service.StudentService;
@@ -30,38 +30,38 @@ public class StudentController {
   
   @GetMapping("/{id}")
   public String detail(@PathVariable Long id, Model model) {
-    Student student = studentService.findById(id);
-    model.addAttribute("student", student);
+    StudentLocalModel studentLocalModel = studentService.findById(id);
+    model.addAttribute("student", studentLocalModel);
     return "student/detail";
   }
   
   @GetMapping("/new")
   public String createForm(Model model) {
-    model.addAttribute("student", new Student());
+    model.addAttribute("student", new StudentLocalModel());
     model.addAttribute("documentTypes", DocumentType.values());
     model.addAttribute("studentStatuses", StudentStatus.values());
     return "student/form";
   }
   
   @PostMapping
-  public String create(@ModelAttribute Student student) {
-    studentService.save(student);
+  public String create(@ModelAttribute StudentLocalModel studentLocalModel) {
+    studentService.save(studentLocalModel);
     return "redirect:/student";
   }
   
   @GetMapping("/{id}/edit")
   public String editForm(@PathVariable Long id, Model model) {
-    Student student = studentService.findById(id);
-    model.addAttribute("student", student);
+    StudentLocalModel studentLocalModel = studentService.findById(id);
+    model.addAttribute("student", studentLocalModel);
     model.addAttribute("documentTypes", DocumentType.values());
     model.addAttribute("studentStatuses", StudentStatus.values());
     return "student/form";
   }
   
   @PostMapping("/{id}")
-  public String update(@PathVariable Long id, @ModelAttribute Student student) {
-    student.setId(id);
-    studentService.update(student);
+  public String update(@PathVariable Long id, @ModelAttribute StudentLocalModel studentLocalModel) {
+    studentLocalModel.setId(id);
+    studentService.update(studentLocalModel);
     return "redirect:/student/" + id;
   }
   

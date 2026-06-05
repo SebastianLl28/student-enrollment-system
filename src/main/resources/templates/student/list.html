@@ -26,7 +26,7 @@
         <small class="text-muted">Listado de estudiantes registrados</small>
       </div>
 
-      <a th:href="@{/student/new}" class="btn btn-primary">
+      <a th:href="@{/studentLocalModel/new}" class="btn btn-primary">
         <i class="bi bi-person-plus me-1"></i>Nuevo estudiante
       </a>
     </div>
@@ -49,46 +49,46 @@
             </thead>
 
             <tbody>
-            <tr th:each="student : ${students}">
-              <td th:text="${student.code}">2026-001</td>
+            <tr th:each="studentLocalModel : ${students}">
+              <td th:text="${studentLocalModel.code}">2026-001</td>
 
-              <td class="text-nowrap" th:text="${student.fullName}">
+              <td class="text-nowrap" th:text="${studentLocalModel.fullName}">
                 Juan Pérez
               </td>
 
               <td class="text-nowrap">
-                <span class="text-muted small" th:text="${student.documentType}">DNI</span>
-                <span th:text="${student.documentNumber}">12345678</span>
+                <span class="text-muted small" th:text="${studentLocalModel.documentType}">DNI</span>
+                <span th:text="${studentLocalModel.documentNumber}">12345678</span>
               </td>
 
               <td>
             <span class="d-inline-block text-truncate"
                   style="max-width: 200px;"
-                  th:text="${student.email}">
+                  th:text="${studentLocalModel.email}">
               juan@email.com
             </span>
               </td>
 
-              <td class="text-nowrap" th:text="${student.phone}">
+              <td class="text-nowrap" th:text="${studentLocalModel.phone}">
                 987654321
               </td>
 
               <td>
             <span class="badge"
-                  th:classappend="${student.status.name() == 'ACTIVE'} ? ' bg-success' : ' bg-secondary'"
-                  th:text="${student.status}">
+                  th:classappend="${studentLocalModel.status.name() == 'ACTIVE'} ? ' bg-success' : ' bg-secondary'"
+                  th:text="${studentLocalModel.status}">
               ACTIVE
             </span>
               </td>
 
               <td class="text-center text-nowrap">
-                <a th:href="@{/student/{id}(id=${student.id})}"
+                <a th:href="@{/studentLocalModel/{id}(id=${studentLocalModel.id})}"
                    class="btn btn-sm btn-outline-secondary me-1"
                    title="Ver detalle">
                   <i class="bi bi-eye"></i>
                 </a>
 
-                <a th:href="@{/student/{id}/edit(id=${student.id})}"
+                <a th:href="@{/studentLocalModel/{id}/edit(id=${studentLocalModel.id})}"
                    class="btn btn-sm btn-outline-primary"
                    title="Editar">
                   <i class="bi bi-pencil"></i>

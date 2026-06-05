@@ -2,7 +2,7 @@ package pe.utp.marcodesarrolloweb.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import pe.utp.marcodesarrolloweb.model.Student;
+import pe.utp.marcodesarrolloweb.model.StudentLocalModel;
 
 @Service
 public class StudentService {
@@ -14,30 +14,30 @@ public class StudentService {
   }
   
   
-  public List<Student> findAll() {
-    return dataStore.students;
+  public List<StudentLocalModel> findAll() {
+    return dataStore.studentLocalModels;
   }
   
-  public Student findById(Long id) {
-    return dataStore.students.stream()
+  public StudentLocalModel findById(Long id) {
+    return dataStore.studentLocalModels.stream()
       .filter(s -> s.getId().equals(id))
       .findFirst()
       .orElseThrow(() -> new RuntimeException("Student not found"));
   }
   
-  public void update(Student student) {
-    dataStore.students.removeIf(s -> s.getId().equals(student.getId()));
-    dataStore.students.add(student);
+  public void update(StudentLocalModel studentLocalModel) {
+    dataStore.studentLocalModels.removeIf(s -> s.getId().equals(studentLocalModel.getId()));
+    dataStore.studentLocalModels.add(studentLocalModel);
   }
   
-  public void save(Student student) {
-    if (student.getId() == null) {
-      student.setId(dataStore.students.stream()
-        .mapToLong(Student::getId)
+  public void save(StudentLocalModel studentLocalModel) {
+    if (studentLocalModel.getId() == null) {
+      studentLocalModel.setId(dataStore.studentLocalModels.stream()
+        .mapToLong(StudentLocalModel::getId)
         .max()
         .orElse(0L) + 1);
     }
-    dataStore.students.add(student);
+    dataStore.studentLocalModels.add(studentLocalModel);
   }
   
 }

@@ -1,53 +1,41 @@
 package pe.utp.marcodesarrolloweb.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import java.time.LocalDateTime;
-import org.hibernate.annotations.CreationTimestamp;
 import pe.utp.marcodesarrolloweb.model.enums.DocumentType;
 import pe.utp.marcodesarrolloweb.model.enums.StudentStatus;
 
-/**
- * @author Alonso
- */
-@Entity
-public class Student {
+public class StudentLocalModel {
   
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  
-  @Column(nullable = false)
   private String code;
-  
-  @Column(nullable = false)
   private String firstName;
-  
-  @Column(nullable = false)
   private String lastName;
-  
-  @Column(nullable = false)
   private DocumentType documentType;
-  
-  @Column(nullable = false)
   private String documentNumber;
-  
-  @Column(nullable = false)
   private String email;
-  
   private String phone;
-  
   private String address;
-  
-  @Column(nullable = false)
-  private StudentStatus status = StudentStatus.ACTIVE;
-  
-  @CreationTimestamp
-  @Column(updatable = false)
+  private StudentStatus status;
   private LocalDateTime createdAt;
+  
+  public StudentLocalModel() {
+  }
+  
+  public StudentLocalModel(Long id, String code, String firstName, String lastName, DocumentType documentType,
+    String documentNumber, String email, String phone, String address, StudentStatus status,
+    LocalDateTime createdAt) {
+    this.id = id;
+    this.code = code;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.documentType = documentType;
+    this.documentNumber = documentNumber;
+    this.email = email;
+    this.phone = phone;
+    this.address = address;
+    this.status = status;
+    this.createdAt = createdAt;
+  }
   
   public Long getId() {
     return id;
@@ -135,5 +123,9 @@ public class Student {
   
   public void setCreatedAt(LocalDateTime createdAt) {
     this.createdAt = createdAt;
+  }
+  
+  public String getFullName() {
+    return firstName + " " + lastName;
   }
 }
