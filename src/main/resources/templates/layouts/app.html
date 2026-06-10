@@ -41,14 +41,21 @@
           </a>
         </li>
         <li class="nav-item">
-          <a th:href="@{/app/secure/students}"
+          <a th:href="@{/app/secure/student}"
              class="nav-link text-white d-flex align-items-center gap-2"
              th:classappend="${activeMenu == 'students'} ? 'active' : ''">
             <i class="bi bi-people"></i> Estudiantes
           </a>
         </li>
         <li class="nav-item">
-          <a th:href="@{/app/secure/programs}"
+          <a th:href="@{/app/secure/academicPeriod}"
+             class="nav-link text-white d-flex align-items-center gap-2"
+             th:classappend="${activeMenu == 'periods'} ? 'active' : ''">
+            <i class="bi bi-calendar-range"></i> Periodos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a th:href="@{/app/secure/academicProgram}"
              class="nav-link text-white d-flex align-items-center gap-2"
              th:classappend="${activeMenu == 'programs'} ? 'active' : ''">
             <i class="bi bi-mortarboard"></i> Programas
