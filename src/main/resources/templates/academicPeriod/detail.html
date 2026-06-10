@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}" lang="es">
+<head>
+  <title th:text="${academicPeriod.name}">Periodo académico</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="h3 mb-1" th:text="${academicPeriod.name}">2026-I</h1>
+      <p class="text-muted mb-0">ID: <span th:text="${academicPeriod.id}">1</span></p>
+    </div>
+    <div class="d-flex gap-2">
+      <a th:href="@{/academicPeriod}" class="btn btn-outline-secondary">Volver</a>
+      <a th:href="@{/academicPeriod/{id}/edit(id=${academicPeriod.id})}" class="btn btn-primary">Editar</a>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <h2 class="h5 mb-0">Información del periodo</h2>
+    </div>
+    <div class="card-body">
+
+      <div class="row mb-3">
+        <div class="col-md-4 fw-semibold">ID</div>
+        <div class="col-md-8" th:text="${academicPeriod.id}">1</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4 fw-semibold">Nombre</div>
+        <div class="col-md-8" th:text="${academicPeriod.name}">2026-I</div>
+      </div>
+
+      <hr>
+
+      <div class="row mb-3">
+        <div class="col-md-4 fw-semibold">Fecha de inicio</div>
+        <div class="col-md-8"
+             th:text="${#temporals.format(academicPeriod.startDate, 'dd/MM/yyyy')}">01/01/2026</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4 fw-semibold">Fecha de fin</div>
+        <div class="col-md-8"
+             th:text="${#temporals.format(academicPeriod.endDate, 'dd/MM/yyyy')}">31/07/2026</div>
+      </div>
+
+      <hr>
+
+      <div class="row mb-3">
+        <div class="col-md-4 fw-semibold">Estado</div>
+        <div class="col-md-8">
+          <span class="badge"
+                th:classappend="${academicPeriod.active} ? ' bg-success' : ' bg-secondary'"
+                th:text="${academicPeriod.active} ? 'Activo' : 'Inactivo'">Activo</span>
+        </div>
+      </div>
+
+      <div class="row mb-0">
+        <div class="col-md-4 fw-semibold">Fecha de creación</div>
+        <div class="col-md-8"
+             th:text="${#temporals.format(academicPeriod.createdAt, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:30</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

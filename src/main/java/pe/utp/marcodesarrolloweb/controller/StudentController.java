@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pe.utp.marcodesarrolloweb.model.StudentLocalModel;
+import pe.utp.marcodesarrolloweb.model.Student;
 import pe.utp.marcodesarrolloweb.model.enums.DocumentType;
 import pe.utp.marcodesarrolloweb.model.enums.StudentStatus;
 import pe.utp.marcodesarrolloweb.service.StudentService;
 
 @Controller
-@RequestMapping("/student")
+@RequestMapping("/app/secure/student")
 public class StudentController {
   
   private final StudentService studentService;
@@ -30,40 +30,45 @@ public class StudentController {
   
   @GetMapping("/{id}")
   public String detail(@PathVariable Long id, Model model) {
-    StudentLocalModel studentLocalModel = studentService.findById(id);
-    model.addAttribute("student", studentLocalModel);
+    model.addAttribute("student", studentService.findById(id));
     return "student/detail";
   }
   
   @GetMapping("/new")
   public String createForm(Model model) {
-    model.addAttribute("student", new StudentLocalModel());
+    model.addAttribute("student", new Student());
     model.addAttribute("documentTypes", DocumentType.values());
     model.addAttribute("studentStatuses", StudentStatus.values());
     return "student/form";
   }
   
   @PostMapping
-  public String create(@ModelAttribute StudentLocalModel studentLocalModel) {
-    studentService.save(studentLocalModel);
-    return "redirect:/student";
+  public String create(@ModelAttribute Student student) {
+    studentService.save(student);
+    return "redirect:/app/secure/student";
   }
   
   @GetMapping("/{id}/edit")
   public String editForm(@PathVariable Long id, Model model) {
-    StudentLocalModel studentLocalModel = studentService.findById(id);
-    model.addAttribute("student", studentLocalModel);
+    model.addAttribute("student", studentService.findById(id));
     model.addAttribute("documentTypes", DocumentType.values());
     model.addAttribute("studentStatuses", StudentStatus.values());
     return "student/form";
   }
   
   @PostMapping("/{id}")
-  public String update(@PathVariable Long id, @ModelAttribute StudentLocalModel studentLocalModel) {
-    studentLocalModel.setId(id);
-    studentService.update(studentLocalModel);
-    return "redirect:/student/" + id;
+  public String update(@PathVariable Long id, @ModelAttribute Student formData) {
+    Student student = studentService.findById(id);
+    student.setCode(formData.getCode());
+    student.setFirstName(formData.getFirstName());
+    student.setLastName(formData.getLastName());
+    student.setDocumentType(formData.getDocumentType());
+    student.setDocumentNumber(formData.getDocumentNumber());
+    student.setEmail(formData.getEmail());
+    student.setPhone(formData.getPhone());
+    student.setAddress(formData.getAddress());
+    student.setStatus(formData.getStatus());
+    studentService.save(student);
+    return "redirect:/app/secure/student/" + id;
   }
-  
 }
-

@@ -2,6 +2,8 @@ package pe.utp.marcodesarrolloweb.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,6 +31,7 @@ public class Student {
   @Column(nullable = false)
   private String lastName;
   
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private DocumentType documentType;
   
@@ -42,12 +45,16 @@ public class Student {
   
   private String address;
   
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private StudentStatus status = StudentStatus.ACTIVE;
   
   @CreationTimestamp
   @Column(updatable = false)
   private LocalDateTime createdAt;
+  
+  public Student() {
+  }
   
   public Long getId() {
     return id;
@@ -135,5 +142,9 @@ public class Student {
   
   public void setCreatedAt(LocalDateTime createdAt) {
     this.createdAt = createdAt;
+  }
+  
+  public String getFullName() {
+    return firstName + " " + lastName;
   }
 }
