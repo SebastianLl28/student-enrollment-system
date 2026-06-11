@@ -31,12 +31,20 @@
         <div class="row g-3">
           <div class="col-md-6">
             <label for="code" class="form-label">Código</label>
-            <input type="text" id="code" class="form-control" th:field="*{code}" placeholder="Ej: ING-SIS" required>
+            <input type="text" id="code" class="form-control"
+                   th:field="*{code}"
+                   th:classappend="${#fields.hasErrors('code')} ? 'is-invalid'"
+                   placeholder="Ej: ING-SIS">
+            <div class="invalid-feedback" th:errors="*{code}">Error</div>
           </div>
 
           <div class="col-md-6">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" id="name" class="form-control" th:field="*{name}" placeholder="Ej: Ingeniería de Sistemas" required>
+            <input type="text" id="name" class="form-control"
+                   th:field="*{name}"
+                   th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'"
+                   placeholder="Ej: Ingeniería de Sistemas">
+            <div class="invalid-feedback" th:errors="*{name}">Error</div>
           </div>
 
           <div class="col-12">

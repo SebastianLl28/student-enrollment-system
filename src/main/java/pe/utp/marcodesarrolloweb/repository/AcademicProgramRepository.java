@@ -10,4 +10,6 @@ public interface AcademicProgramRepository extends JpaRepository<AcademicProgram
   
   boolean existsByCode(String code);
   
+  boolean existsByCodeAndIdNot(String code, Long id);
+  
 }

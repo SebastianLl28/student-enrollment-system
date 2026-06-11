@@ -1,7 +1,9 @@
 package pe.utp.marcodesarrolloweb.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +45,21 @@ public class StudentController {
   }
   
   @PostMapping
-  public String create(@ModelAttribute Student student) {
+  public String create(@Valid @ModelAttribute Student student,
+      BindingResult result, Model model) {
+    
+    if (student.getDocumentType() != null && student.getDocumentNumber() != null
+        && studentService.isDuplicateDocument(student.getDocumentType(), student.getDocumentNumber())) {
+      result.rejectValue("documentNumber", "duplicate",
+          "Ya existe un estudiante con ese tipo y número de documento");
+    }
+    
+    if (result.hasErrors()) {
+      model.addAttribute("documentTypes", DocumentType.values());
+      model.addAttribute("studentStatuses", StudentStatus.values());
+      return "student/form";
+    }
+    
     studentService.save(student);
     return "redirect:/app/secure/student";
   }
@@ -57,18 +73,35 @@ public class StudentController {
   }
   
   @PostMapping("/{id}")
-  public String update(@PathVariable Long id, @ModelAttribute Student formData) {
-    Student student = studentService.findById(id);
-    student.setCode(formData.getCode());
-    student.setFirstName(formData.getFirstName());
-    student.setLastName(formData.getLastName());
-    student.setDocumentType(formData.getDocumentType());
-    student.setDocumentNumber(formData.getDocumentNumber());
-    student.setEmail(formData.getEmail());
-    student.setPhone(formData.getPhone());
-    student.setAddress(formData.getAddress());
-    student.setStatus(formData.getStatus());
-    studentService.save(student);
+  public String update(@PathVariable Long id,
+      @Valid @ModelAttribute Student student,
+      BindingResult result, Model model) {
+    
+    if (student.getDocumentType() != null && student.getDocumentNumber() != null
+        && studentService.isDuplicateDocument(student.getDocumentType(), student.getDocumentNumber(), id)) {
+      result.rejectValue("documentNumber", "duplicate",
+          "Ya existe otro estudiante con ese tipo y número de documento");
+    }
+    
+    if (result.hasErrors()) {
+      student.setId(id);
+      model.addAttribute("documentTypes", DocumentType.values());
+      model.addAttribute("studentStatuses", StudentStatus.values());
+      return "student/form";
+    }
+    
+    Student existing = studentService.findById(id);
+    existing.setCode(student.getCode());
+    existing.setFirstName(student.getFirstName());
+    existing.setLastName(student.getLastName());
+    existing.setDocumentType(student.getDocumentType());
+    existing.setDocumentNumber(student.getDocumentNumber());
+    existing.setEmail(student.getEmail());
+    existing.setPhone(student.getPhone());
+    existing.setAddress(student.getAddress());
+    existing.setStatus(student.getStatus());
+    studentService.save(existing);
+    
     return "redirect:/app/secure/student/" + id;
   }
 }

@@ -1,7 +1,9 @@
 package pe.utp.marcodesarrolloweb.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +44,18 @@ public class AcademicPeriodController {
   }
   
   @PostMapping
-  public String create(@ModelAttribute AcademicPeriod academicPeriod) {
+  public String create(@Valid @ModelAttribute AcademicPeriod academicPeriod,
+      BindingResult result) {
+    
+    if (academicPeriod.getName() != null
+        && academicPeriodService.isDuplicateName(academicPeriod.getName())) {
+      result.rejectValue("name", "duplicate", "Ya existe un periodo con ese nombre");
+    }
+    
+    if (result.hasErrors()) {
+      return "academicPeriod/form";
+    }
+    
     academicPeriodService.save(academicPeriod);
     return "redirect:/app/secure/academicPeriod";
   }
@@ -54,13 +67,27 @@ public class AcademicPeriodController {
   }
   
   @PostMapping("/{id}")
-  public String update(@PathVariable Long id, @ModelAttribute AcademicPeriod formData) {
-    AcademicPeriod academicPeriod = academicPeriodService.findById(id);
-    academicPeriod.setName(formData.getName());
-    academicPeriod.setStartDate(formData.getStartDate());
-    academicPeriod.setEndDate(formData.getEndDate());
-    academicPeriod.setActive(formData.getActive());
-    academicPeriodService.save(academicPeriod);
+  public String update(@PathVariable Long id,
+      @Valid @ModelAttribute AcademicPeriod academicPeriod,
+      BindingResult result) {
+    
+    if (academicPeriod.getName() != null
+        && academicPeriodService.isDuplicateName(academicPeriod.getName(), id)) {
+      result.rejectValue("name", "duplicate", "Ya existe otro periodo con ese nombre");
+    }
+    
+    if (result.hasErrors()) {
+      academicPeriod.setId(id);
+      return "academicPeriod/form";
+    }
+    
+    AcademicPeriod existing = academicPeriodService.findById(id);
+    existing.setName(academicPeriod.getName());
+    existing.setStartDate(academicPeriod.getStartDate());
+    existing.setEndDate(academicPeriod.getEndDate());
+    existing.setActive(academicPeriod.getActive());
+    academicPeriodService.save(existing);
+    
     return "redirect:/app/secure/academicPeriod/" + id;
   }
 }

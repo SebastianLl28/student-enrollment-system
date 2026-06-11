@@ -1,7 +1,9 @@
 package pe.utp.marcodesarrolloweb.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,10 +45,22 @@ public class AcademicProgramController {
   }
   
   @PostMapping
-  public String create(@ModelAttribute AcademicProgram academicProgram) {
+  public String create(@Valid @ModelAttribute AcademicProgram academicProgram,
+      BindingResult result) {
+    
+    if (academicProgram.getCode() != null
+        && academicProgramService.isDuplicateCode(academicProgram.getCode())) {
+      result.rejectValue("code", "duplicate", "Ya existe un programa con ese código");
+    }
+    
+    if (result.hasErrors()) {
+      return "academicProgram/form";
+    }
+    
     academicProgramService.save(academicProgram);
     return "redirect:/app/secure/academicProgram";
   }
+  
   
   @GetMapping("/{id}/edit")
   public String editForm(@PathVariable Long id, Model model) {
@@ -55,13 +69,27 @@ public class AcademicProgramController {
   }
   
   @PostMapping("/{id}")
-  public String update(@PathVariable Long id, @ModelAttribute AcademicProgram formData) {
-    AcademicProgram academicProgram = academicProgramService.findById(id);
-    academicProgram.setCode(formData.getCode());
-    academicProgram.setName(formData.getName());
-    academicProgram.setDescription(formData.getDescription());
-    academicProgram.setActive(formData.getActive());
-    academicProgramService.save(academicProgram);
+  public String update(@PathVariable Long id,
+      @Valid @ModelAttribute AcademicProgram academicProgram,
+      BindingResult result) {
+    
+    if (academicProgram.getCode() != null
+        && academicProgramService.isDuplicateCode(academicProgram.getCode(), id)) {
+      result.rejectValue("code", "duplicate", "Ya existe otro programa con ese código");
+    }
+    
+    if (result.hasErrors()) {
+      academicProgram.setId(id);
+      return "academicProgram/form";
+    }
+    
+    AcademicProgram existing = academicProgramService.findById(id);
+    existing.setCode(academicProgram.getCode());
+    existing.setName(academicProgram.getName());
+    existing.setDescription(academicProgram.getDescription());
+    existing.setActive(academicProgram.getActive());
+    academicProgramService.save(existing);
+    
     return "redirect:/app/secure/academicProgram/" + id;
   }
 }

@@ -29,4 +29,12 @@ public class AcademicPeriodService {
   public AcademicPeriod save(AcademicPeriod academicPeriod) {
     return repository.save(academicPeriod);
   }
+  
+  public boolean isDuplicateName(String name) {
+    return repository.existsByName(name);
+  }
+  
+  public boolean isDuplicateName(String name, Long excludeId) {
+    return repository.existsByNameAndIdNot(name, excludeId);
+  }
 }

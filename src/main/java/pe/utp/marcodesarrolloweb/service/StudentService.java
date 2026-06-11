@@ -3,6 +3,7 @@ package pe.utp.marcodesarrolloweb.service;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import pe.utp.marcodesarrolloweb.model.Student;
+import pe.utp.marcodesarrolloweb.model.enums.DocumentType;
 import pe.utp.marcodesarrolloweb.repository.StudentRepository;
 
 @Service
@@ -25,5 +26,13 @@ public class StudentService {
   
   public Student save(Student student) {
     return repository.save(student);
+  }
+  
+  public boolean isDuplicateDocument(DocumentType type, String number) {
+    return repository.existsByDocumentTypeAndDocumentNumber(type, number);
+  }
+  
+  public boolean isDuplicateDocument(DocumentType type, String number, Long excludeId) {
+    return repository.existsByDocumentTypeAndDocumentNumberAndIdNot(type, number, excludeId);
   }
 }

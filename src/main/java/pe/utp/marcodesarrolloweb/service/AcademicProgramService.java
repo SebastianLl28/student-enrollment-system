@@ -30,4 +30,12 @@ public class AcademicProgramService {
   public AcademicProgram save(AcademicProgram academicProgram) {
     return repository.save(academicProgram);
   }
+  
+  public boolean isDuplicateCode(String code) {
+    return repository.existsByCode(code);
+  }
+  
+  public boolean isDuplicateCode(String code, Long excludeId) {
+    return repository.existsByCodeAndIdNot(code, excludeId);
+  }
 }

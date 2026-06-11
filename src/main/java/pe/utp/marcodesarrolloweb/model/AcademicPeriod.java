@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.time.Instant;
 import java.time.LocalDate;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,11 +22,14 @@ public class AcademicPeriod {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   
+  @NotBlank(message = "El nombre es obligatorio")
   private String name;
   
+  @NotNull(message = "La fecha de inicio es obligatoria")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate startDate;
   
+  @NotNull(message = "La fecha de inicio es obligatoria")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate endDate;
   

@@ -7,6 +7,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import pe.utp.marcodesarrolloweb.model.enums.DocumentType;
@@ -22,22 +25,29 @@ public class Student {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   
+  @NotBlank(message = "El código es obligatorio")
   @Column(nullable = false)
   private String code;
   
+  @NotBlank(message = "Los nombres son obligatorios")
   @Column(nullable = false)
   private String firstName;
   
+  @NotBlank(message = "Los apellidos son obligatorios")
   @Column(nullable = false)
   private String lastName;
   
+  @NotNull(message = "Seleccione un tipo de documento")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private DocumentType documentType;
   
+  @NotBlank(message = "El número de documento es obligatorio")
   @Column(nullable = false)
   private String documentNumber;
   
+  @NotBlank(message = "El email es obligatorio")
+  @Email(message = "Email inválido")
   @Column(nullable = false)
   private String email;
   
@@ -45,6 +55,7 @@ public class Student {
   
   private String address;
   
+  @NotNull(message = "Seleccione un estado")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private StudentStatus status = StudentStatus.ACTIVE;

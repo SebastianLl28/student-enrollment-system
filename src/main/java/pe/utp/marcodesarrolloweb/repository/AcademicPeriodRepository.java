@@ -10,4 +10,7 @@ public interface AcademicPeriodRepository extends JpaRepository<AcademicPeriod, 
   
   boolean existsByName(String name);
   
+  boolean existsByNameAndIdNot(String name, Long id);
+  
+  
 }

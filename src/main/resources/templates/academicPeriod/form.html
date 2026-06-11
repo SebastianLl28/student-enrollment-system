@@ -31,7 +31,11 @@
         <div class="row g-3">
           <div class="col-12">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" id="name" class="form-control" th:field="*{name}" placeholder="Ej: 2026-I" required>
+            <input type="text" id="name" class="form-control"
+                   th:field="*{name}"
+                   th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'"
+                   placeholder="Ej: 2026-I">
+            <div class="invalid-feedback" th:errors="*{name}">Error</div>
           </div>
 
           <div class="col-md-6">

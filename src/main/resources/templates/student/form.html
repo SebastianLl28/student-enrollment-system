@@ -3,7 +3,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/app}" lang="es">
 <head>
-  <title th:text="${student.id == null} ? 'Nuevo estudiante' : 'Editar estudiante'">Formulario estudiante</title>
+  <title th:text="${student.id == null} ? 'Nuevo estudiante' : 'Editar estudiante'">Formulario
+    estudiante</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -23,62 +24,91 @@
 
   <div class="card shadow-sm">
     <div class="card-body">
-      <form th:with="formAction=${student.id == null} ? '/app/secure/student' : '/app/secure/student/' + ${student.id}"
-            th:action="@{${formAction}}"
-            th:object="${student}"
-            method="post">
+      <form
+          th:with="formAction=${student.id == null} ? '/app/secure/student' : '/app/secure/student/' + ${student.id}"
+          th:action="@{${formAction}}"
+          th:object="${student}"
+          method="post">
 
         <div class="row g-3">
 
           <div class="col-md-6">
             <label for="code" class="form-label">Código</label>
-            <input type="text" id="code" class="form-control" th:field="*{code}" placeholder="Ej: 2026-001" required>
+            <input type="text" id="code" class="form-control"
+                   th:field="*{code}"
+                   th:classappend="${#fields.hasErrors('code')} ? 'is-invalid'"
+                   placeholder="Ej: 2026-001">
+            <div class="invalid-feedback" th:errors="*{code}">Error</div>
           </div>
 
           <div class="col-md-6">
             <label for="status" class="form-label">Estado</label>
-            <select id="status" class="form-select" th:field="*{status}" required>
+            <select id="status" class="form-select" th:field="*{status}"
+                    th:classappend="${#fields.hasErrors('status')} ? 'is-invalid'">
               <option value="">Seleccione un estado</option>
-              <option th:each="s : ${studentStatuses}" th:value="${s}" th:text="${s}">ACTIVE</option>
+              <option th:each="s : ${studentStatuses}" th:value="${s}" th:text="${s}">ACTIVE
+              </option>
             </select>
+            <div class="invalid-feedback" th:errors="*{status}">Error</div>
           </div>
 
           <div class="col-md-6">
             <label for="firstName" class="form-label">Nombres</label>
-            <input type="text" id="firstName" class="form-control" th:field="*{firstName}" placeholder="Ej: Juan" required>
+            <input type="text" id="firstName" class="form-control"
+                   th:field="*{firstName}"
+                   th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid'"
+                   placeholder="Ej: Juan">
+            <div class="invalid-feedback" th:errors="*{firstName}">Error</div>
           </div>
 
           <div class="col-md-6">
             <label for="lastName" class="form-label">Apellidos</label>
-            <input type="text" id="lastName" class="form-control" th:field="*{lastName}" placeholder="Ej: Pérez" required>
+            <input type="text" id="lastName" class="form-control"
+                   th:field="*{lastName}"
+                   th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid'"
+                   placeholder="Ej: Pérez">
+            <div class="invalid-feedback" th:errors="*{lastName}">Error</div>
           </div>
 
           <div class="col-md-6">
             <label for="documentType" class="form-label">Tipo de documento</label>
-            <select id="documentType" class="form-select" th:field="*{documentType}" required>
+            <select id="documentType" class="form-select" th:field="*{documentType}"
+                    th:classappend="${#fields.hasErrors('documentType')} ? 'is-invalid'">
               <option value="">Seleccione un tipo</option>
-              <option th:each="type : ${documentTypes}" th:value="${type}" th:text="${type}">DNI</option>
+              <option th:each="type : ${documentTypes}" th:value="${type}" th:text="${type}">DNI
+              </option>
             </select>
+            <div class="invalid-feedback" th:errors="*{documentType}">Error</div>
           </div>
 
           <div class="col-md-6">
             <label for="documentNumber" class="form-label">Número de documento</label>
-            <input type="text" id="documentNumber" class="form-control" th:field="*{documentNumber}" placeholder="Ej: 12345678" required>
+            <input type="text" id="documentNumber" class="form-control"
+                   th:field="*{documentNumber}"
+                   th:classappend="${#fields.hasErrors('documentNumber')} ? 'is-invalid'"
+                   placeholder="Ej: 12345678">
+            <div class="invalid-feedback" th:errors="*{documentNumber}">Error</div>
           </div>
 
           <div class="col-md-6">
             <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" class="form-control" th:field="*{email}" placeholder="Ej: estudiante@email.com" required>
+            <input type="email" id="email" class="form-control"
+                   th:field="*{email}"
+                   th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"
+                   placeholder="Ej: estudiante@email.com">
+            <div class="invalid-feedback" th:errors="*{email}">Error</div>
           </div>
 
           <div class="col-md-6">
             <label for="phone" class="form-label">Teléfono</label>
-            <input type="text" id="phone" class="form-control" th:field="*{phone}" placeholder="Ej: 987654321">
+            <input type="text" id="phone" class="form-control" th:field="*{phone}"
+                   placeholder="Ej: 987654321">
           </div>
 
           <div class="col-12">
             <label for="address" class="form-label">Dirección</label>
-            <input type="text" id="address" class="form-control" th:field="*{address}" placeholder="Ej: Av. Principal 123">
+            <input type="text" id="address" class="form-control" th:field="*{address}"
+                   placeholder="Ej: Av. Principal 123">
           </div>
 
         </div>

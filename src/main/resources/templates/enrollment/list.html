@@ -39,13 +39,11 @@
             <td class="text-nowrap" th:text="${enrollment.academicPeriod.name}">2026-I</td>
             <td class="text-nowrap"
                 th:text="${#temporals.format(enrollment.enrollmentDate, 'dd/MM/yyyy')}">01/03/2026</td>
-
             <td th:switch="${enrollment.status.name()}">
               <span th:case="'ENROLLED'" class="badge bg-success">Matriculado</span>
               <span th:case="'PENDING_PAYMENT'" class="badge bg-warning text-dark">Pendiente de pago</span>
               <span th:case="'CANCELLED'" class="badge bg-secondary">Cancelada</span>
             </td>
-
             <td class="text-center text-nowrap">
               <a th:href="@{/app/secure/enrollment/{id}(id=${enrollment.id})}"
                  class="btn btn-sm btn-outline-secondary" title="Ver detalle">
@@ -53,7 +51,6 @@
               </a>
             </td>
           </tr>
-
           <tr th:if="${#lists.isEmpty(enrollments)}">
             <td colspan="6" class="text-center text-muted py-4">No hay matrículas registradas.</td>
           </tr>

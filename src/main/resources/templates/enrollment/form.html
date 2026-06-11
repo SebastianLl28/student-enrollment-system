@@ -18,48 +18,62 @@
     </a>
   </div>
 
-  <div th:if="${error}" class="alert alert-danger" th:text="${error}">Error</div>
-
   <div class="card shadow-sm">
     <div class="card-body">
       <form th:action="@{/app/secure/enrollment}" method="post">
 
+        <div th:if="${errors.containsKey('global')}" class="alert alert-danger"
+             th:text="${errors.global}">Error</div>
+
         <div class="row g-3">
 
-          <div class="col-md-12">
+          <div class="col-12">
             <label for="studentId" class="form-label">Estudiante</label>
-            <select id="studentId" name="studentId" class="form-select" required>
+            <select id="studentId" name="studentId" class="form-select"
+                    th:classappend="${errors.containsKey('student')} ? 'is-invalid'">
               <option value="">Seleccione un estudiante</option>
               <option th:each="s : ${students}"
                       th:value="${s.id}"
+                      th:selected="${s.id == selectedStudentId}"
                       th:text="|${s.fullName} (${s.code})|">Juan Pérez (2026-001)</option>
             </select>
+            <div class="invalid-feedback" th:if="${errors.containsKey('student')}"
+                 th:text="${errors.student}">Error</div>
           </div>
 
           <div class="col-md-6">
             <label for="academicProgramId" class="form-label">Programa académico</label>
-            <select id="academicProgramId" name="academicProgramId" class="form-select" required>
+            <select id="academicProgramId" name="academicProgramId" class="form-select"
+                    th:classappend="${errors.containsKey('program')} ? 'is-invalid'">
               <option value="">Seleccione un programa</option>
               <option th:each="p : ${programs}" th:if="${p.active}"
                       th:value="${p.id}"
+                      th:selected="${p.id == selectedProgramId}"
                       th:text="${p.name}">Ingeniería de Software</option>
             </select>
+            <div class="invalid-feedback" th:if="${errors.containsKey('program')}"
+                 th:text="${errors.program}">Error</div>
           </div>
 
           <div class="col-md-6">
             <label for="academicPeriodId" class="form-label">Periodo académico</label>
-            <select id="academicPeriodId" name="academicPeriodId" class="form-select" required>
+            <select id="academicPeriodId" name="academicPeriodId" class="form-select"
+                    th:classappend="${errors.containsKey('period')} ? 'is-invalid'">
               <option value="">Seleccione un periodo</option>
               <option th:each="per : ${periods}" th:if="${per.active}"
                       th:value="${per.id}"
+                      th:selected="${per.id == selectedPeriodId}"
                       th:text="${per.name}">2026-I</option>
             </select>
+            <div class="invalid-feedback" th:if="${errors.containsKey('period')}"
+                 th:text="${errors.period}">Error</div>
           </div>
 
           <div class="col-12">
             <label for="observation" class="form-label">Observación <span class="text-muted">(opcional)</span></label>
             <textarea id="observation" name="observation" class="form-control" rows="3"
-                      placeholder="Notas adicionales sobre la matrícula"></textarea>
+                      placeholder="Notas adicionales sobre la matrícula"
+                      th:text="${observation}"></textarea>
           </div>
 
         </div>
