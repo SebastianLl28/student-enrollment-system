@@ -7,5 +7,7 @@ import pe.utp.marcodesarrolloweb.model.AcademicProgram;
  * @author Alonso
  */
 public interface AcademicProgramRepository extends JpaRepository<AcademicProgram, Long> {
-
+  
+  boolean existsByCode(String code);
+  
 }

@@ -62,6 +62,13 @@
           </a>
         </li>
         <li class="nav-item">
+          <a th:href="@{/app/secure/enrollment}"
+             class="nav-link text-white d-flex align-items-center gap-2"
+             th:classappend="${activeMenu == 'enrollments'} ? 'active' : ''">
+            <i class="bi bi-journal-text"></i> Matrículas
+          </a>
+        </li>
+        <li class="nav-item">
           <a th:href="@{/app/secure/payments}"
              class="nav-link text-white d-flex align-items-center gap-2"
              th:classappend="${activeMenu == 'payments'} ? 'active' : ''">

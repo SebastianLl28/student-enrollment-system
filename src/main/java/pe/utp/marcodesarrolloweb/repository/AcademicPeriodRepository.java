@@ -7,5 +7,7 @@ import pe.utp.marcodesarrolloweb.model.AcademicPeriod;
  * @author Alonso
  */
 public interface AcademicPeriodRepository extends JpaRepository<AcademicPeriod, Long> {
-
+  
+  boolean existsByName(String name);
+  
 }

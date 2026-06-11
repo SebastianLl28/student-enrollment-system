@@ -2,11 +2,16 @@ package pe.utp.marcodesarrolloweb.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
+import pe.utp.marcodesarrolloweb.model.enums.EnrollmentStatus;
 
 /**
  * @author Alonso
@@ -18,22 +23,27 @@ public class Enrollment {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   
-  private Long studentId;
+  @ManyToOne(optional = false)
+  private Student student;
   
-  private Long academicProgramId;
+  @ManyToOne(optional = false)
+  private AcademicProgram academicProgram;
   
-  private Long academicPeriodId;
+  @ManyToOne(optional = false)
+  private AcademicPeriod academicPeriod;
   
+  @Column(nullable = false)
   private LocalDate enrollmentDate;
   
-  private Boolean active = Boolean.TRUE;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private EnrollmentStatus status = EnrollmentStatus.PENDING_PAYMENT;
+  
+  private String observation;
   
   @CreationTimestamp
   @Column(updatable = false)
-  private LocalDate createdAt;
-  
-  public Enrollment() {
-  }
+  private LocalDateTime createdAt;
   
   public Long getId() {
     return id;
@@ -43,28 +53,28 @@ public class Enrollment {
     this.id = id;
   }
   
-  public Long getStudentId() {
-    return studentId;
+  public Student getStudent() {
+    return student;
   }
   
-  public void setStudentId(Long studentId) {
-    this.studentId = studentId;
+  public void setStudent(Student student) {
+    this.student = student;
   }
   
-  public Long getAcademicProgramId() {
-    return academicProgramId;
+  public AcademicProgram getAcademicProgram() {
+    return academicProgram;
   }
   
-  public void setAcademicProgramId(Long academicProgramId) {
-    this.academicProgramId = academicProgramId;
+  public void setAcademicProgram(AcademicProgram academicProgram) {
+    this.academicProgram = academicProgram;
   }
   
-  public Long getAcademicPeriodId() {
-    return academicPeriodId;
+  public AcademicPeriod getAcademicPeriod() {
+    return academicPeriod;
   }
   
-  public void setAcademicPeriodId(Long academicPeriodId) {
-    this.academicPeriodId = academicPeriodId;
+  public void setAcademicPeriod(AcademicPeriod academicPeriod) {
+    this.academicPeriod = academicPeriod;
   }
   
   public LocalDate getEnrollmentDate() {
@@ -75,11 +85,27 @@ public class Enrollment {
     this.enrollmentDate = enrollmentDate;
   }
   
-  public Boolean getActive() {
-    return active;
+  public EnrollmentStatus getStatus() {
+    return status;
   }
   
-  public void setActive(Boolean active) {
-    this.active = active;
+  public void setStatus(EnrollmentStatus status) {
+    this.status = status;
+  }
+  
+  public String getObservation() {
+    return observation;
+  }
+  
+  public void setObservation(String observation) {
+    this.observation = observation;
+  }
+  
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+  
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
   }
 }

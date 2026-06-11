@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}" lang="es">
+<head>
+  <title>Matrículas</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+      <h2 class="mb-0"><i class="bi bi-journal-text me-2"></i>Matrículas</h2>
+      <small class="text-muted">Listado de matrículas registradas</small>
+    </div>
+    <a th:href="@{/app/secure/enrollment/new}" class="btn btn-primary">
+      <i class="bi bi-journal-plus me-1"></i>Nueva matrícula
+    </a>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle mb-0">
+          <thead class="table-primary">
+          <tr>
+            <th>Estudiante</th>
+            <th>Programa</th>
+            <th>Periodo</th>
+            <th>Fecha de matrícula</th>
+            <th>Estado</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="enrollment : ${enrollments}">
+            <td class="text-nowrap" th:text="${enrollment.student.fullName}">Juan Pérez</td>
+            <td th:text="${enrollment.academicProgram.name}">Ingeniería de Software</td>
+            <td class="text-nowrap" th:text="${enrollment.academicPeriod.name}">2026-I</td>
+            <td class="text-nowrap"
+                th:text="${#temporals.format(enrollment.enrollmentDate, 'dd/MM/yyyy')}">01/03/2026</td>
+
+            <td th:switch="${enrollment.status.name()}">
+              <span th:case="'ENROLLED'" class="badge bg-success">Matriculado</span>
+              <span th:case="'PENDING_PAYMENT'" class="badge bg-warning text-dark">Pendiente de pago</span>
+              <span th:case="'CANCELLED'" class="badge bg-secondary">Cancelada</span>
+            </td>
+
+            <td class="text-center text-nowrap">
+              <a th:href="@{/app/secure/enrollment/{id}(id=${enrollment.id})}"
+                 class="btn btn-sm btn-outline-secondary" title="Ver detalle">
+                <i class="bi bi-eye"></i>
+              </a>
+            </td>
+          </tr>
+
+          <tr th:if="${#lists.isEmpty(enrollments)}">
+            <td colspan="6" class="text-center text-muted py-4">No hay matrículas registradas.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
