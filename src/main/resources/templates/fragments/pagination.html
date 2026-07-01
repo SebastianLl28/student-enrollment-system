@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<body>
+<th:block th:fragment="paginator(page, pageUrl)">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-3 px-1">
+
+    <!-- Conteo de registros -->
+    <small class="text-muted" th:if="${page.totalElements > 0}">
+      Mostrando
+      <strong th:text="${page.number * page.size + 1}">1</strong> –
+      <strong th:text="${page.number * page.size + page.numberOfElements}">10</strong>
+      de <strong th:text="${page.totalElements}">100</strong> registros
+    </small>
+    <small class="text-muted" th:if="${page.totalElements == 0}">Sin registros</small>
+
+    <!-- Botones de página (solo si hay más de una página) -->
+    <nav th:if="${page.totalPages > 1}" aria-label="Páginas">
+      <ul class="pagination pagination-sm mb-0">
+
+        <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+          <a class="page-link" th:href="@{__${pageUrl}__(page=${page.number - 1})}"
+             aria-label="Anterior">
+            <i class="bi bi-chevron-left" style="font-size:.75rem"></i>
+          </a>
+        </li>
+
+        <th:block th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+          <!-- Ellipsis inicio -->
+          <li class="page-item disabled"
+              th:if="${i == 2 and page.number > 4 and page.totalPages > 7}">
+            <span class="page-link">…</span>
+          </li>
+          <!-- Mostrar solo: primera, última, y ventana ±2 alrededor de la actual -->
+          <li class="page-item"
+              th:if="${i == 0 or i == page.totalPages - 1
+                       or (i >= page.number - 2 and i <= page.number + 2)
+                       or page.totalPages <= 7}"
+              th:classappend="${i == page.number} ? 'active'">
+            <a class="page-link" th:href="@{__${pageUrl}__(page=${i})}" th:text="${i + 1}">1</a>
+          </li>
+          <!-- Ellipsis final -->
+          <li class="page-item disabled"
+              th:if="${i == page.totalPages - 3 and page.number < page.totalPages - 5 and page.totalPages > 7}">
+            <span class="page-link">…</span>
+          </li>
+        </th:block>
+
+        <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+          <a class="page-link" th:href="@{__${pageUrl}__(page=${page.number + 1})}"
+             aria-label="Siguiente">
+            <i class="bi bi-chevron-right" style="font-size:.75rem"></i>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+</th:block>
+</body>
+</html>

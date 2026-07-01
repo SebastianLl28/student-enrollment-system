@@ -18,6 +18,12 @@
     </a>
   </div>
 
+  <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+    <span th:text="${errorMessage}"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+
   <div class="card shadow-sm">
     <div class="card-body p-0">
       <div class="table-responsive">
@@ -25,22 +31,22 @@
           <thead class="table-primary">
           <tr>
             <th>Nombre</th>
-            <th>Inicio</th>
-            <th>Fin</th>
+            <th class="d-none d-sm-table-cell">Inicio</th>
+            <th class="d-none d-sm-table-cell">Fin</th>
             <th>Estado</th>
             <th class="text-center">Acciones</th>
           </tr>
           </thead>
           <tbody>
           <tr th:each="academicPeriod : ${academicPeriods}">
-            <td th:text="${academicPeriod.name}">2026-I</td>
-            <td class="text-nowrap"
+            <td class="fw-semibold" th:text="${academicPeriod.name}">2026-I</td>
+            <td class="d-none d-sm-table-cell text-nowrap"
                 th:text="${#temporals.format(academicPeriod.startDate, 'dd/MM/yyyy')}">01/01/2026</td>
-            <td class="text-nowrap"
+            <td class="d-none d-sm-table-cell text-nowrap"
                 th:text="${#temporals.format(academicPeriod.endDate, 'dd/MM/yyyy')}">31/07/2026</td>
             <td>
               <span class="badge"
-                    th:classappend="${academicPeriod.active} ? ' bg-success' : ' bg-secondary'"
+                    th:classappend="${academicPeriod.active} ? 'bg-success' : 'bg-secondary'"
                     th:text="${academicPeriod.active} ? 'Activo' : 'Inactivo'">Activo</span>
             </td>
             <td class="text-center text-nowrap">
@@ -49,9 +55,16 @@
                 <i class="bi bi-eye"></i>
               </a>
               <a th:href="@{/app/secure/academicPeriod/{id}/edit(id=${academicPeriod.id})}"
-                 class="btn btn-sm btn-outline-primary" title="Editar">
+                 class="btn btn-sm btn-outline-primary me-1" title="Editar">
                 <i class="bi bi-pencil"></i>
               </a>
+              <form th:action="@{/app/secure/academicPeriod/{id}/delete(id=${academicPeriod.id})}"
+                    method="post" class="d-inline"
+                    onsubmit="return confirm('¿Eliminar este periodo académico?')">
+                <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
             </td>
           </tr>
           <tr th:if="${#lists.isEmpty(academicPeriods)}">
@@ -60,6 +73,9 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="card-footer bg-white border-top-0 pb-3">
+      <div th:replace="~{fragments/pagination :: paginator(${page}, '/app/secure/academicPeriod')}"></div>
     </div>
   </div>
 

@@ -1,6 +1,7 @@
 package pe.utp.marcodesarrolloweb.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pe.utp.marcodesarrolloweb.model.AcademicProgram;
 import pe.utp.marcodesarrolloweb.service.AcademicProgramService;
 
@@ -26,9 +29,16 @@ public class AcademicProgramController {
     this.academicProgramService = academicProgramService;
   }
   
+  @ModelAttribute("activeMenu")
+  public String activeMenu() {
+    return "programs";
+  }
+
   @GetMapping
-  public String list(Model model) {
-    model.addAttribute("academicPrograms", academicProgramService.findAll());
+  public String list(@RequestParam(defaultValue = "0") int page, Model model) {
+    Page<AcademicProgram> programPage = academicProgramService.findPage(page, 10);
+    model.addAttribute("page", programPage);
+    model.addAttribute("academicPrograms", programPage.getContent());
     return "academicProgram/list";
   }
   
@@ -91,5 +101,11 @@ public class AcademicProgramController {
     academicProgramService.save(existing);
     
     return "redirect:/app/secure/academicProgram/" + id;
+  }
+
+  @PostMapping("/{id}/toggle-active")
+  public String toggleActive(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+    academicProgramService.toggleActive(id);
+    return "redirect:/app/secure/academicProgram";
   }
 }

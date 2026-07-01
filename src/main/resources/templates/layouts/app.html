@@ -47,14 +47,14 @@
             <i class="bi bi-people"></i> Estudiantes
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
           <a th:href="@{/app/secure/academicPeriod}"
              class="nav-link text-white d-flex align-items-center gap-2"
              th:classappend="${activeMenu == 'periods'} ? 'active' : ''">
             <i class="bi bi-calendar-range"></i> Periodos
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
           <a th:href="@{/app/secure/academicProgram}"
              class="nav-link text-white d-flex align-items-center gap-2"
              th:classappend="${activeMenu == 'programs'} ? 'active' : ''">
@@ -68,22 +68,28 @@
             <i class="bi bi-journal-text"></i> Matrículas
           </a>
         </li>
-        <li class="nav-item">
-          <a th:href="@{/app/secure/payments}"
-             class="nav-link text-white d-flex align-items-center gap-2"
-             th:classappend="${activeMenu == 'payments'} ? 'active' : ''">
-            <i class="bi bi-credit-card"></i> Pagos
-          </a>
-        </li>
       </ul>
 
-      <!-- Usuario + cerrar sesión, pegado abajo -->
+      <!-- Usuario + perfil + cerrar sesión -->
       <div class="mt-auto">
         <hr class="border-secondary">
-        <div class="px-3 mb-2 small">
-          <i class="bi bi-person-circle"></i>
-          <span sec:authentication="name">Usuario</span>
-        </div>
+        <a th:href="@{/app/secure/profile}"
+           class="d-flex align-items-center gap-2 px-3 mb-2 text-decoration-none"
+           th:classappend="${activeMenu == 'profile'} ? 'text-white' : 'text-secondary'">
+          <i class="bi bi-person-circle fs-5"></i>
+          <div class="lh-sm">
+            <div class="small fw-semibold text-white"
+                 sec:authentication="principal.user.fullName">Usuario</div>
+            <div style="font-size:.7rem">
+              <span class="badge px-1 py-0"
+                    sec:authorize="hasRole('ADMIN')"
+                    style="background:rgba(239,68,68,.7);font-size:.65rem">Admin</span>
+              <span class="badge px-1 py-0"
+                    sec:authorize="hasRole('SECRETARY')"
+                    style="background:rgba(6,182,212,.7);font-size:.65rem">Secretaría</span>
+            </div>
+          </div>
+        </a>
         <form th:action="@{/logout}" method="post">
           <button type="submit" class="btn btn-outline-light w-100 d-flex align-items-center justify-content-center gap-2">
             <i class="bi bi-box-arrow-right"></i> Cerrar sesión
@@ -103,5 +109,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script th:src="@{/js/script.js}"></script>
+<th:block layout:fragment="scripts"></th:block>
 </body>
 </html>

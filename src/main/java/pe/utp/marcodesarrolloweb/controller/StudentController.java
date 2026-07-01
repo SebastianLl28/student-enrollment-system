@@ -1,6 +1,7 @@
 package pe.utp.marcodesarrolloweb.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pe.utp.marcodesarrolloweb.model.Student;
 import pe.utp.marcodesarrolloweb.model.enums.DocumentType;
 import pe.utp.marcodesarrolloweb.model.enums.StudentStatus;
@@ -24,9 +27,16 @@ public class StudentController {
     this.studentService = studentService;
   }
   
+  @ModelAttribute("activeMenu")
+  public String activeMenu() {
+    return "students";
+  }
+
   @GetMapping
-  public String list(Model model) {
-    model.addAttribute("students", studentService.findAll());
+  public String list(@RequestParam(defaultValue = "0") int page, Model model) {
+    Page<Student> studentPage = studentService.findPage(page, 10);
+    model.addAttribute("page", studentPage);
+    model.addAttribute("students", studentPage.getContent());
     return "student/list";
   }
   
@@ -103,5 +113,11 @@ public class StudentController {
     studentService.save(existing);
     
     return "redirect:/app/secure/student/" + id;
+  }
+
+  @PostMapping("/{id}/toggle-status")
+  public String toggleStatus(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+    studentService.toggleStatus(id);
+    return "redirect:/app/secure/student";
   }
 }

@@ -2,15 +2,19 @@ package pe.utp.marcodesarrolloweb.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pe.utp.marcodesarrolloweb.model.Enrollment;
 import pe.utp.marcodesarrolloweb.service.AcademicPeriodService;
 import pe.utp.marcodesarrolloweb.service.AcademicProgramService;
+import pe.utp.marcodesarrolloweb.service.EnrollmentPaymentOrchestrator;
 import pe.utp.marcodesarrolloweb.service.EnrollmentService;
 import pe.utp.marcodesarrolloweb.service.StudentService;
 
@@ -27,15 +31,17 @@ public class EnrollmentController {
   private final StudentService studentService;
   private final AcademicProgramService academicProgramService;
   private final AcademicPeriodService academicPeriodService;
+  private final EnrollmentPaymentOrchestrator orchestrator;
   
   public EnrollmentController(EnrollmentService enrollmentService,
       StudentService studentService,
       AcademicProgramService academicProgramService,
-      AcademicPeriodService academicPeriodService) {
+      AcademicPeriodService academicPeriodService, EnrollmentPaymentOrchestrator orchestrator) {
     this.enrollmentService = enrollmentService;
     this.studentService = studentService;
     this.academicProgramService = academicProgramService;
     this.academicPeriodService = academicPeriodService;
+    this.orchestrator = orchestrator;
   }
   
   @ModelAttribute("activeMenu")
@@ -44,11 +50,19 @@ public class EnrollmentController {
   }
   
   @GetMapping
-  public String list(Model model) {
-    model.addAttribute("enrollments", enrollmentService.findAll());
+  public String list(@RequestParam(defaultValue = "0") int page, Model model) {
+    Page<Enrollment> enrollmentPage = enrollmentService.findPage(page, 10);
+    model.addAttribute("page", enrollmentPage);
+    model.addAttribute("enrollments", enrollmentPage.getContent());
     return "enrollment/list";
   }
   
+  @GetMapping("/{id}")
+  public String detail(@PathVariable Long id, Model model) {
+    model.addAttribute("enrollment", enrollmentService.findById(id));
+    return "enrollment/detail";
+  }
+
   @GetMapping("/new")
   public String createForm(Model model) {
     addSelectData(model);
@@ -70,7 +84,7 @@ public class EnrollmentController {
     
     if (errors.isEmpty()) {
       try {
-        enrollmentService.create(studentId, academicProgramId, academicPeriodId, observation);
+        orchestrator.enroll(studentId, academicProgramId, academicPeriodId, observation);
         return "redirect:/app/secure/enrollment";
       } catch (IllegalStateException e) {
         errors.put("global", e.getMessage());
@@ -86,6 +100,12 @@ public class EnrollmentController {
     return "enrollment/form";
   }
   
+  @PostMapping("/{id}/cancel")
+  public String cancel(@PathVariable Long id) {
+    enrollmentService.cancel(id);
+    return "redirect:/app/secure/enrollment";
+  }
+
   private void addSelectData(Model model) {
     model.addAttribute("students", studentService.findAll());
     model.addAttribute("programs", academicProgramService.findAll());

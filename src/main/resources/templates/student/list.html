@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/app}" lang="es">
 <head>
   <title>Estudiantes</title>
@@ -13,7 +14,8 @@
       <h2 class="mb-0"><i class="bi bi-people me-2"></i>Estudiantes</h2>
       <small class="text-muted">Listado de estudiantes registrados</small>
     </div>
-    <a th:href="@{/app/secure/student/new}" class="btn btn-primary">
+    <a th:href="@{/app/secure/student/new}" class="btn btn-primary"
+       sec:authorize="hasRole('ADMIN')">
       <i class="bi bi-person-plus me-1"></i>Nuevo estudiante
     </a>
   </div>
@@ -24,32 +26,32 @@
         <table class="table table-hover table-striped align-middle mb-0">
           <thead class="table-primary">
           <tr>
-            <th>Código</th>
+            <th class="d-none d-sm-table-cell">Código</th>
             <th>Nombre completo</th>
-            <th>Documento</th>
-            <th>Email</th>
-            <th>Teléfono</th>
+            <th class="d-none d-md-table-cell">Documento</th>
+            <th class="d-none d-lg-table-cell">Email</th>
+            <th class="d-none d-md-table-cell">Teléfono</th>
             <th>Estado</th>
             <th class="text-center">Acciones</th>
           </tr>
           </thead>
           <tbody>
           <tr th:each="student : ${students}">
-            <td th:text="${student.code}">2026-001</td>
-            <td class="text-nowrap" th:text="${student.fullName}">Juan Pérez</td>
-            <td class="text-nowrap">
+            <td class="d-none d-sm-table-cell text-nowrap" th:text="${student.code}">2026-001</td>
+            <td class="text-nowrap fw-semibold" th:text="${student.fullName}">Juan Pérez</td>
+            <td class="d-none d-md-table-cell text-nowrap">
               <span class="text-muted small" th:text="${student.documentType}">DNI</span>
               <span th:text="${student.documentNumber}">12345678</span>
             </td>
-            <td>
-              <span class="d-inline-block text-truncate" style="max-width: 200px;"
+            <td class="d-none d-lg-table-cell">
+              <span class="d-inline-block text-truncate" style="max-width:200px"
                     th:text="${student.email}">juan@email.com</span>
             </td>
-            <td class="text-nowrap" th:text="${student.phone}">987654321</td>
+            <td class="d-none d-md-table-cell text-nowrap" th:text="${student.phone}">987654321</td>
             <td>
               <span class="badge"
-                    th:classappend="${student.status.name() == 'ACTIVE'} ? ' bg-success' : ' bg-secondary'"
-                    th:text="${student.status}">ACTIVE</span>
+                    th:classappend="${student.status.name() == 'ACTIVE'} ? 'bg-success' : 'bg-secondary'"
+                    th:text="${student.status.name() == 'ACTIVE'} ? 'Activo' : 'Inactivo'">ACTIVE</span>
             </td>
             <td class="text-center text-nowrap">
               <a th:href="@{/app/secure/student/{id}(id=${student.id})}"
@@ -57,9 +59,20 @@
                 <i class="bi bi-eye"></i>
               </a>
               <a th:href="@{/app/secure/student/{id}/edit(id=${student.id})}"
-                 class="btn btn-sm btn-outline-primary" title="Editar">
+                 class="btn btn-sm btn-outline-primary me-1" title="Editar"
+                 sec:authorize="hasRole('ADMIN')">
                 <i class="bi bi-pencil"></i>
               </a>
+              <form th:action="@{/app/secure/student/{id}/toggle-status(id=${student.id})}"
+                    method="post" class="d-inline"
+                    sec:authorize="hasRole('ADMIN')">
+                <button type="submit" class="btn btn-sm"
+                        th:classappend="${student.status.name() == 'ACTIVE'} ? 'btn-outline-warning' : 'btn-outline-success'"
+                        th:title="${student.status.name() == 'ACTIVE'} ? 'Desactivar' : 'Activar'">
+                  <i class="bi"
+                     th:classappend="${student.status.name() == 'ACTIVE'} ? 'bi-toggle-on' : 'bi-toggle-off'"></i>
+                </button>
+              </form>
             </td>
           </tr>
           <tr th:if="${#lists.isEmpty(students)}">
@@ -68,6 +81,9 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="card-footer bg-white border-top-0 pb-3">
+      <div th:replace="~{fragments/pagination :: paginator(${page}, '/app/secure/student')}"></div>
     </div>
   </div>
 

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}" lang="es">
+<head>
+  <title>Mi perfil</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <div class="mb-4">
+    <h2 class="mb-0"><i class="bi bi-person-circle me-2"></i>Mi perfil</h2>
+    <small class="text-muted">Información de tu cuenta</small>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm border-0">
+
+        <!-- Cabecera con avatar -->
+        <div class="card-body text-center py-4"
+             style="background:linear-gradient(135deg,#1e293b 0%,#334155 100%);border-radius:.375rem .375rem 0 0">
+          <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+               style="width:80px;height:80px;background:rgba(255,255,255,.15)">
+            <i class="bi bi-person-fill text-white" style="font-size:2.5rem"></i>
+          </div>
+          <h4 class="text-white mb-1" th:text="${profileUser.fullName}">Nombre Apellido</h4>
+          <span class="badge fs-6 px-3 py-1"
+                th:classappend="${profileUser.role.name() == 'ADMIN'} ? 'bg-danger' : 'bg-info text-dark'"
+                th:text="${profileUser.role.name() == 'ADMIN'} ? 'Administrador' : 'Secretaría / Asistente'">
+            Rol
+          </span>
+        </div>
+
+        <!-- Datos del usuario -->
+        <div class="card-body">
+          <dl class="row mb-0">
+
+            <dt class="col-sm-4 text-muted fw-normal">
+              <i class="bi bi-person me-1"></i>Nombre
+            </dt>
+            <dd class="col-sm-8 fw-semibold" th:text="${profileUser.firstName}">—</dd>
+
+            <dt class="col-sm-4 text-muted fw-normal mt-2">
+              <i class="bi bi-person me-1"></i>Apellido
+            </dt>
+            <dd class="col-sm-8 fw-semibold mt-2" th:text="${profileUser.lastName}">—</dd>
+
+            <dt class="col-sm-4 text-muted fw-normal mt-2">
+              <i class="bi bi-envelope me-1"></i>Correo
+            </dt>
+            <dd class="col-sm-8 fw-semibold mt-2" th:text="${profileUser.email}">—</dd>
+
+            <dt class="col-sm-4 text-muted fw-normal mt-2">
+              <i class="bi bi-shield-check me-1"></i>Rol
+            </dt>
+            <dd class="col-sm-8 mt-2">
+              <span class="badge"
+                    th:classappend="${profileUser.role.name() == 'ADMIN'} ? 'bg-danger' : 'bg-info text-dark'"
+                    th:text="${profileUser.role.name() == 'ADMIN'} ? 'Administrador' : 'Secretaría / Asistente'">
+                Rol
+              </span>
+            </dd>
+
+            <dt class="col-sm-4 text-muted fw-normal mt-2">
+              <i class="bi bi-toggle-on me-1"></i>Estado
+            </dt>
+            <dd class="col-sm-8 mt-2">
+              <span class="badge"
+                    th:classappend="${profileUser.userStatus.name() == 'ACTIVE'} ? 'bg-success' : 'bg-secondary'"
+                    th:text="${profileUser.userStatus.name() == 'ACTIVE'} ? 'Activo' : 'Inactivo'">
+                Estado
+              </span>
+            </dd>
+
+            <dt class="col-sm-4 text-muted fw-normal mt-2" th:if="${profileUser.createdAt != null}">
+              <i class="bi bi-calendar me-1"></i>Miembro desde
+            </dt>
+            <dd class="col-sm-8 fw-semibold mt-2" th:if="${profileUser.createdAt != null}"
+                th:text="${#temporals.format(profileUser.createdAt, 'dd/MM/yyyy')}">—</dd>
+
+          </dl>
+        </div>
+
+        <!-- Descripción de permisos -->
+        <div class="card-footer bg-light border-0">
+          <p class="small text-muted mb-1 fw-semibold">Permisos de este rol:</p>
+          <ul class="small text-muted mb-0 ps-3"
+              th:if="${profileUser.role.name() == 'ADMIN'}">
+            <li>Acceso completo al panel de administración</li>
+            <li>Gestión de estudiantes, programas, periodos y matrículas</li>
+            <li>Creación, edición y cancelación de registros</li>
+          </ul>
+          <ul class="small text-muted mb-0 ps-3"
+              th:if="${profileUser.role.name() == 'SECRETARY'}">
+            <li>Acceso de solo lectura a estudiantes y matrículas</li>
+            <li>Visualización del panel de inicio con KPIs</li>
+            <li>Sin permisos para crear, editar ni cancelar registros</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

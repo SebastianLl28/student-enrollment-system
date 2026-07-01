@@ -5,7 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
@@ -29,6 +32,11 @@ public class AcademicProgram {
   private String description;
   
   private Boolean active = Boolean.TRUE;
+  
+  @NotNull(message = "El precio es obligatorio")
+  @DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor a 0")
+  @Column(precision = 10, scale = 2)
+  private BigDecimal price;
   
   @CreationTimestamp
   @Column(updatable = false)
@@ -83,5 +91,13 @@ public class AcademicProgram {
   
   public void setCreatedAt(LocalDateTime createdAt) {
     this.createdAt = createdAt;
+  }
+  
+  public BigDecimal getPrice() {
+    return price;
+  }
+  
+  public void setPrice(BigDecimal price) {
+    this.price = price;
   }
 }

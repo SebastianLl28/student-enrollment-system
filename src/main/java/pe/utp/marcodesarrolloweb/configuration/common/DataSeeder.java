@@ -12,6 +12,7 @@ import pe.utp.marcodesarrolloweb.model.Student;
 import pe.utp.marcodesarrolloweb.model.User;
 import pe.utp.marcodesarrolloweb.model.enums.DocumentType;
 import pe.utp.marcodesarrolloweb.model.enums.StudentStatus;
+import pe.utp.marcodesarrolloweb.model.enums.UserRole;
 import pe.utp.marcodesarrolloweb.repository.AcademicPeriodRepository;
 import pe.utp.marcodesarrolloweb.repository.AcademicProgramRepository;
 import pe.utp.marcodesarrolloweb.repository.StudentRepository;
@@ -26,16 +27,37 @@ public class DataSeeder {
   @Bean
   CommandLineRunner seedUsers(UserRepository userRepository, PasswordEncoder passwordEncoder) {
     return args -> {
-      String email = "u12345678@utp.eud.pe";
-      if (userRepository.findByEmail(email).isEmpty()) {
-        User user = new User();
-        user.setFirstName("FirstName");
-        user.setLastName("LastName");
-        user.setEmail(email);
-        user.setPassword(passwordEncoder.encode("123456"));
-        userRepository.save(user);
-        System.out.println("Usuario de prueba creado: " + email);
+      // Administrador
+      String adminEmail = "admin@horizonte.edu.pe";
+      if (userRepository.findByEmail(adminEmail).isEmpty()) {
+        User admin = new User();
+        admin.setFirstName("Administrador");
+        admin.setLastName("Sistema");
+        admin.setEmail(adminEmail);
+        admin.setPassword(passwordEncoder.encode("admin123"));
+        admin.setRole(UserRole.ADMIN);
+        userRepository.save(admin);
       }
+
+      // Secretaria
+      String secEmail = "secretaria@horizonte.edu.pe";
+      if (userRepository.findByEmail(secEmail).isEmpty()) {
+        User sec = new User();
+        sec.setFirstName("María");
+        sec.setLastName("García");
+        sec.setEmail(secEmail);
+        sec.setPassword(passwordEncoder.encode("sec123"));
+        sec.setRole(UserRole.SECRETARY);
+        userRepository.save(sec);
+      }
+
+      // Actualizar usuarios existentes sin rol asignado
+      userRepository.findAll().forEach(u -> {
+        if (u.getRole() == null) {
+          u.setRole(UserRole.ADMIN);
+          userRepository.save(u);
+        }
+      });
     };
   }
   

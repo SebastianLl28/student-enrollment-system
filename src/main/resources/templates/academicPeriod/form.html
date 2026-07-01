@@ -40,7 +40,11 @@
 
           <div class="col-md-6">
             <label for="startDate" class="form-label">Fecha de inicio</label>
-            <input type="date" id="startDate" class="form-control" th:field="*{startDate}" required>
+            <input type="date" id="startDate" class="form-control"
+                   th:field="*{startDate}"
+                   th:classappend="${#fields.hasErrors('startDate')} ? 'is-invalid'"
+                   required>
+            <div class="invalid-feedback" th:errors="*{startDate}">Error</div>
           </div>
 
           <div class="col-md-6">

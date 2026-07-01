@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
@@ -54,9 +55,24 @@ public class Enrollment {
   
   private String observation;
   
+  @Column(name = "paypal_order_id")
+  private String paypalOrderId;
+  
+  @Column(precision = 10, scale = 2)
+  private BigDecimal amount;
+  
+  @Column(length = 3)
+  private String currency;
+  
+  @Column(name = "paid_at")
+  private LocalDateTime paidAt;
+  
   @CreationTimestamp
   @Column(updatable = false)
   private LocalDateTime createdAt;
+  
+  public Enrollment() {
+  }
   
   public Long getId() { return id; }
   public void setId(Long id) { this.id = id; }
@@ -86,4 +102,48 @@ public class Enrollment {
   
   public LocalDateTime getCreatedAt() { return createdAt; }
   public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+  
+  public void setStudent(Student student) {
+    this.student = student;
+  }
+  
+  public void setAcademicProgram(AcademicProgram academicProgram) {
+    this.academicProgram = academicProgram;
+  }
+  
+  public void setAcademicPeriod(AcademicPeriod academicPeriod) {
+    this.academicPeriod = academicPeriod;
+  }
+  
+  public String getPaypalOrderId() {
+    return paypalOrderId;
+  }
+  
+  public void setPaypalOrderId(String paypalOrderId) {
+    this.paypalOrderId = paypalOrderId;
+  }
+  
+  public BigDecimal getAmount() {
+    return amount;
+  }
+  
+  public void setAmount(BigDecimal amount) {
+    this.amount = amount;
+  }
+  
+  public String getCurrency() {
+    return currency;
+  }
+  
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+  
+  public LocalDateTime getPaidAt() {
+    return paidAt;
+  }
+  
+  public void setPaidAt(LocalDateTime paidAt) {
+    this.paidAt = paidAt;
+  }
 }
