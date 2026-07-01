@@ -1,5 +1,6 @@
 package pe.utp.marcodesarrolloweb.configuration.common;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.boot.CommandLineRunner;
@@ -66,15 +67,15 @@ public class DataSeeder {
     return args -> {
       List<AcademicProgram> programs = List.of(
           program("ING-SOFT", "Ingeniería de Software",
-              "Desarrollo de software, sistemas y aplicaciones."),
+              "Desarrollo de software, sistemas y aplicaciones.", new BigDecimal("1500.00")),
           program("ING-SIS", "Ingeniería de Sistemas",
-              "Análisis, diseño y gestión de sistemas de información."),
+              "Análisis, diseño y gestión de sistemas de información.", new BigDecimal("1400.00")),
           program("ADM-EMP", "Administración de Empresas",
-              "Gestión empresarial, finanzas y operaciones."),
-          program("CONT", "Contabilidad", "Contabilidad financiera, tributación y auditoría."),
-          program("ENG", "Programa de Inglés", "Formación en idioma inglés en distintos niveles."),
+              "Gestión empresarial, finanzas y operaciones.", new BigDecimal("1300.00")),
+          program("CONT", "Contabilidad", "Contabilidad financiera, tributación y auditoría.", new BigDecimal("1200.00")),
+          program("ENG", "Programa de Inglés", "Formación en idioma inglés en distintos niveles.", new BigDecimal("800.00")),
           program("PRE", "Programa Preuniversitario",
-              "Preparación para el ingreso a la universidad.")
+              "Preparación para el ingreso a la universidad.", new BigDecimal("1000.00"))
       );
       programs.forEach(p -> {
         if (!repository.existsByCode(p.getCode())) {
@@ -135,12 +136,13 @@ public class DataSeeder {
   
   // ---------- helpers ----------
   
-  private AcademicProgram program(String code, String name, String description) {
+  private AcademicProgram program(String code, String name, String description, BigDecimal price) {
     AcademicProgram p = new AcademicProgram();
     p.setCode(code);
     p.setName(name);
     p.setDescription(description);
     p.setActive(true);
+    p.setPrice(price);
     return p;
   }
   
